@@ -1,0 +1,182 @@
+[
+  {
+    "id": "rule_001",
+    "category": "fatigue",
+    "source": "Sécurité Routière",
+    "text": "La somnolence au volant est responsable de 1 accident mortel sur 3 sur autoroute. Dès les premiers signes de fatigue (yeux lourds, bâillements répétés), il faut s'arrêter immédiatement."
+  },
+  {
+    "id": "rule_002",
+    "category": "fatigue",
+    "source": "Code de la Route",
+    "text": "Il est recommandé de faire une pause d'au moins 15 minutes toutes les 2 heures de conduite. Conduire plus de 4 heures sans pause multiplie par 6 le risque d'accident."
+  },
+  {
+    "id": "rule_003",
+    "category": "fatigue",
+    "source": "Sécurité Routière",
+    "text": "Les seuls remèdes efficaces contre la somnolence sont l'arrêt et le sommeil. Le café ou la musique forte ne compensent pas le manque de sommeil et donnent une fausse impression de vigilance."
+  },
+  {
+    "id": "rule_004",
+    "category": "fatigue",
+    "source": "Études scientifiques",
+    "text": "Conduire après 20 heures sans dormir équivaut à conduire avec un taux d'alcoolémie de 0.5g/L. Les réflexes sont fortement diminués et le temps de réaction est doublé."
+  },
+  {
+    "id": "rule_005",
+    "category": "fatigue",
+    "source": "Sécurité Routière",
+    "text": "La microsommeil (endormissement de 2 à 10 secondes) à 130 km/h représente un trajet de 90 à 360 mètres parcouru sans aucun contrôle du véhicule."
+  },
+  {
+    "id": "rule_006",
+    "category": "nuit",
+    "source": "Sécurité Routière",
+    "text": "La nuit, la visibilité est réduite à 30-50 mètres avec les feux de croisement. Il est obligatoire d'adapter sa vitesse pour pouvoir s'arrêter dans cette distance de visibilité."
+  },
+  {
+    "id": "rule_007",
+    "category": "nuit",
+    "source": "Statistiques accidents",
+    "text": "40% des accidents mortels se produisent la nuit, alors que le trafic nocturne ne représente que 10% du trafic total. Le risque d'accident est 4 fois plus élevé la nuit que le jour."
+  },
+  {
+    "id": "rule_008",
+    "category": "nuit",
+    "source": "Code de la Route",
+    "text": "Entre minuit et 6h du matin, la fatigue est maximale car c'est l'heure naturelle de sommeil du corps humain. Même sans se sentir fatigué, les réflexes sont significativement diminués."
+  },
+  {
+    "id": "rule_009",
+    "category": "nuit",
+    "source": "Sécurité Routière",
+    "text": "La nuit, il faut allumer les phares dès que la visibilité est inférieure à 200 mètres. Les feux de route (pleins phares) sont obligatoires hors agglomération en l'absence d'éclairage public."
+  },
+  {
+    "id": "rule_010",
+    "category": "pluie",
+    "source": "Code de la Route",
+    "text": "Par temps de pluie, la distance de freinage est multipliée par 2. Sur une chaussée mouillée, il faut augmenter la distance de sécurité et réduire la vitesse d'au moins 20 km/h par rapport à la limite."
+  },
+  {
+    "id": "rule_011",
+    "category": "pluie",
+    "source": "Sécurité Routière",
+    "text": "L'aquaplaning survient à partir de 80 km/h sur une chaussée recouverte d'eau. En cas d'aquaplaning, il faut relâcher l'accélérateur progressivement sans freiner brusquement ni tourner le volant."
+  },
+  {
+    "id": "rule_012",
+    "category": "pluie",
+    "source": "Code de la Route",
+    "text": "Par forte pluie ou brouillard dense (visibilité inférieure à 50 mètres), la vitesse maximale autorisée est de 50 km/h sur toutes les routes, quelle que soit la limitation normale."
+  },
+  {
+    "id": "rule_013",
+    "category": "pluie",
+    "source": "Sécurité Routière",
+    "text": "Le verglas est imperceptible à l'œil nu. On doit suspecter sa présence dès que la température est proche de 0°C, notamment sur les ponts, les tunnels et les routes à l'ombre."
+  },
+  {
+    "id": "rule_014",
+    "category": "vitesse",
+    "source": "Code de la Route",
+    "text": "La vitesse est impliquée dans 31% des accidents mortels en France. Une augmentation de vitesse de seulement 10 km/h double la gravité des blessures en cas de choc."
+  },
+  {
+    "id": "rule_015",
+    "category": "vitesse",
+    "source": "Physique de l'accident",
+    "text": "À 50 km/h, la distance d'arrêt totale (réaction + freinage) est de 28 mètres. À 70 km/h, elle passe à 50 mètres. La vitesse ne doit jamais dépasser ce que la visibilité permet."
+  },
+  {
+    "id": "rule_016",
+    "category": "vitesse",
+    "source": "Code de la Route",
+    "text": "En ville, la limite de 30 km/h est de plus en plus généralisée. À 30 km/h, le risque de décès pour un piéton renversé est de 10%. À 50 km/h, il dépasse 80%."
+  },
+  {
+    "id": "rule_017",
+    "category": "telephone",
+    "source": "Code de la Route",
+    "text": "L'utilisation du téléphone en conduisant multiplie par 3 le risque d'accident. Même avec un kit mains-libres, la conversation détourne l'attention cognitive du conducteur."
+  },
+  {
+    "id": "rule_018",
+    "category": "telephone",
+    "source": "Études scientifiques",
+    "text": "Lire ou envoyer un SMS au volant détourne les yeux de la route pendant en moyenne 5 secondes. À 90 km/h, c'est 125 mètres parcourus sans regarder la route."
+  },
+  {
+    "id": "rule_019",
+    "category": "telephone",
+    "source": "Code de la Route",
+    "text": "L'utilisation d'un téléphone tenu en main en conduisant est sanctionnée d'une amende de 135€ et d'un retrait de 3 points. Le téléphone doit être en mode silencieux ou hors de portée."
+  },
+  {
+    "id": "rule_020",
+    "category": "alcool",
+    "source": "Code de la Route",
+    "text": "Le taux d'alcoolémie légal est de 0.5g/L de sang (0.2g/L pour les jeunes conducteurs). Dès 0.5g/L, le risque d'accident mortel est multiplié par 2. À 0.8g/L, il est multiplié par 10."
+  },
+  {
+    "id": "rule_021",
+    "category": "alcool",
+    "source": "Sécurité Routière",
+    "text": "L'alcool est présent dans 30% des accidents mortels. Il réduit les réflexes, diminue la vision périphérique, altère le jugement et donne une fausse impression de maîtrise."
+  },
+  {
+    "id": "rule_022",
+    "category": "alcool",
+    "source": "Sécurité Routière",
+    "text": "La seule façon d'éliminer l'alcool est d'attendre. Le corps élimine en moyenne 0.1g/L d'alcool par heure. Le café, l'eau froide ou l'exercice n'accélèrent pas ce processus."
+  },
+  {
+    "id": "rule_023",
+    "category": "medicaments",
+    "source": "Sécurité Routière",
+    "text": "Les médicaments classés en catégorie 2 et 3 (pictogramme orange ou rouge sur la boîte) peuvent fortement altérer la conduite. Il est impératif de lire la notice et de consulter un médecin avant de conduire."
+  },
+  {
+    "id": "rule_024",
+    "category": "trafic",
+    "source": "Code de la Route",
+    "text": "En cas de trafic dense ou d'embouteillage, la distance de sécurité minimale est de 2 secondes par rapport au véhicule devant. Cette règle des 2 secondes s'applique dans toutes les conditions."
+  },
+  {
+    "id": "rule_025",
+    "category": "trafic",
+    "source": "Sécurité Routière",
+    "text": "Les accidents arrière (tamponnements) représentent 20% des accidents graves en situation de trafic dense. La distraction et la fatigue sont les principales causes."
+  },
+  {
+    "id": "rule_026",
+    "category": "longue_distance",
+    "source": "Réglementation européenne",
+    "text": "Pour les conducteurs professionnels, la durée maximale de conduite est de 9 heures par jour, avec une pause obligatoire de 45 minutes après 4h30 de conduite. Ces règles sont un repère utile pour tous."
+  },
+  {
+    "id": "rule_027",
+    "category": "longue_distance",
+    "source": "Sécurité Routière",
+    "text": "Avant un long trajet, il est fortement recommandé de dormir au moins 7 heures la nuit précédente. Partir tôt le matin après une nuit complète est préférable à conduire en soirée ou la nuit."
+  },
+  {
+    "id": "rule_028",
+    "category": "longue_distance",
+    "source": "Conseils pratiques",
+    "text": "Sur un long trajet, planifiez les pauses à l'avance : arrêt toutes les 2 heures, repas légers (les repas lourds augmentent la somnolence), hydratation régulière, et si possible changer de conducteur."
+  },
+  {
+    "id": "rule_029",
+    "category": "combinaison_risques",
+    "source": "Études scientifiques",
+    "text": "La combinaison fatigue + nuit + pluie multiplie le risque d'accident par 8 par rapport à une conduite normale de jour. Chaque facteur aggravant s'ajoute de manière exponentielle."
+  },
+  {
+    "id": "rule_030",
+    "category": "combinaison_risques",
+    "source": "Sécurité Routière",
+    "text": "Lorsque plusieurs facteurs de risque sont présents simultanément (ex: nuit + fatigue + alcool, même faible), la seule décision responsable est de ne pas conduire et de trouver une alternative."
+  }
+]

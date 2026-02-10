@@ -1,0 +1,15 @@
+# Virtual environments (cover nested paths)
+venv/
+app/venv/
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+
+# Other temp files
+*.log
+*.tmp
