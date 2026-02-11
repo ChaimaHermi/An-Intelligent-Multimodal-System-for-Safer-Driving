@@ -277,39 +277,88 @@ Fournissez une réponse brève et directe en français (2-3 phrases maximum)."""
 
 
 class KnowledgeBaseLoader:
+    """Charge la base de connaissances depuis knowledge_base.py"""
+
     @staticmethod
     def load_knowledge_base(kb_path: str = "knowledge_base.py") -> List[Document]:
+        """
+        Charge les documents depuis knowledge_base.py
+        
+        Le fichier knowledge_base.py doit contenir une variable KNOWLEDGE_BASE
+        qui est une liste de dictionnaires avec les champs suivants:
+        - id (optionnel)
+        - title
+        - content
+        - risk_level (str comme "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO")
+        - category
+        - keywords (liste)
+        - legal_references (liste, optionnel)
+        - statistics (dict, optionnel)
+        - metadata (dict, optionnel)
+        """
+        
+        # Vérifier si le fichier existe
         if not os.path.exists(kb_path):
+            print(f"⚠️  Fichier {kb_path} non trouvé dans le répertoire actuel")
+            print(f"📂 Répertoire actuel: {os.getcwd()}")
+            print("❌ Utilisation des documents par défaut")
             return []
+        
         try:
+            # Importer dynamiquement le module knowledge_base
             spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
             if spec is None or spec.loader is None:
-                return []
+                raise ImportError(f"Impossible de charger {kb_path}")
+            
             kb_module = importlib.util.module_from_spec(spec)
             sys.modules["knowledge_base"] = kb_module
             spec.loader.exec_module(kb_module)
-
+            
+            # Récupérer KNOWLEDGE_BASE
             if not hasattr(kb_module, 'KNOWLEDGE_BASE'):
+                print(f"⚠️  Variable KNOWLEDGE_BASE non trouvée dans {kb_path}")
                 return []
-
+            
+            knowledge_base_data = kb_module.KNOWLEDGE_BASE
+            
+            # Convertir en objets Document
             documents = []
-            risk_map = {
-                "CRITICAL": RiskLevel.CRITICAL, "HIGH": RiskLevel.HIGH,
-                "MEDIUM": RiskLevel.MEDIUM, "LOW": RiskLevel.LOW, "INFO": RiskLevel.INFO
-            }
-            for item in kb_module.KNOWLEDGE_BASE:
+            for idx, item in enumerate(knowledge_base_data):
+                # Générer un ID si non fourni
                 doc_id = item.get("id", f"kb_{hashlib.md5(item['title'].encode()).hexdigest()[:8]}")
-                risk_level = risk_map.get(item.get("risk_level", "MEDIUM").upper(), RiskLevel.MEDIUM)
-                documents.append(Document(
-                    id=doc_id, title=item["title"], content=item["content"],
-                    risk_level=risk_level, category=item.get("category", "Général"),
+                
+                # Convertir le risk_level string en RiskLevel enum
+                risk_level_str = item.get("risk_level", "MEDIUM")
+                risk_level_map = {
+                    "CRITICAL": RiskLevel.CRITICAL,
+                    "HIGH": RiskLevel.HIGH,
+                    "MEDIUM": RiskLevel.MEDIUM,
+                    "LOW": RiskLevel.LOW,
+                    "INFO": RiskLevel.INFO
+                }
+                risk_level = risk_level_map.get(risk_level_str.upper(), RiskLevel.MEDIUM)
+                
+                # Créer le document
+                doc = Document(
+                    id=doc_id,
+                    title=item["title"],
+                    content=item["content"],
+                    risk_level=risk_level,
+                    category=item.get("category", "Général"),
                     keywords=item.get("keywords", []),
                     legal_references=item.get("legal_references", []),
                     statistics=item.get("statistics", {}),
                     metadata=item.get("metadata", {})
-                ))
+                )
+                documents.append(doc)
+            
+            print(f"✅ {len(documents)} documents chargés depuis {kb_path}")
             return documents
-        except Exception:
+            
+        except Exception as e:
+            print(f"❌ Erreur lors du chargement de {kb_path}: {e}")
+            import traceback
+            traceback.print_exc()
             return []
 
 
@@ -346,13 +395,44 @@ class TunisianRoadSafetyRAG:
 # ============================================================================
 # STREAMLIT INTERFACE
 # ============================================================================
+st.markdown("""
+<style>
+/* Sidebar background */
+section[data-testid="stSidebar"] {
+    background-color: white;
+}
 
+/* Sidebar text - force black */
+section[data-testid="stSidebar"] * {
+    color: black !important;
+}
+
+/* Sidebar headers */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {
+    color: black !important;
+}
+
+/* Sidebar expanders */
+section[data-testid="stSidebar"] .st-expander {
+    color: black !important;
+}
+
+/* Sidebar metrics */
+section[data-testid="stSidebar"] [data-testid="stMetricValue"],
+section[data-testid="stSidebar"] [data-testid="stMetricLabel"] {
+    color: black !important;
+}
+</style>
+""", unsafe_allow_html=True)
 def init_rag_system():
     """Initialize the RAG system once and cache it in session state."""
     if "rag_system" not in st.session_state:
         with st.spinner("🚀 Chargement du système RAG..."):
             # Try multiple possible knowledge base paths
-            kb_paths = ["knowledge_base.py", "road_safety_tunisia.py", "safety_docs_2024.py"]
+            kb_paths = ["knowledge_base.py"]
             rag = None
             for path in kb_paths:
                 if os.path.exists(path):
