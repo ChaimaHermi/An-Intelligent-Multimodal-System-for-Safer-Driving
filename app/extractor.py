@@ -1,229 +1,209 @@
+"""
+extractor.py
+------------
+Lightweight structural extraction: pulls numeric values (speed, hours,
+time-of-day) and normalises LLM-produced factor lists against the known
+vocabulary.  Keyword matching is kept only as a fast pre-filter before the
+LLM analyser runs.
+"""
+
 import re
-import spacy
-import subprocess
-import sys
-
-# Try to load model, if not found, download it
-def load_spacy_model():
-    try:
-        # First try medium model
-        return spacy.load("fr_core_news_md")
-    except OSError:
-        try:
-            # Try small model
-            return spacy.load("fr_core_news_sm")
-        except OSError:
-            print("Downloading spaCy French model...")
-            # Download the small model
-            subprocess.check_call([sys.executable, "-m", "spacy", "download", "fr_core_news_sm"])
-            return spacy.load("fr_core_news_sm")
-
-# Load the model
-nlp = load_spacy_model()
 
 # ─────────────────────────────────────────────
-#  KEYWORD DICTIONARY  (French)
-#  Each category has: main keywords + synonyms + number patterns
+#  VOCABULARIES  (used for normalisation only)
 # ─────────────────────────────────────────────
 
-RISK_KEYWORDS = {
-
-    "fatigue": [
-        "fatigué", "fatigue", "épuisé", "épuisement",
-        "somnolence", "somnolent", "endormi", "sommeil",
-        "bâillement", "bâille", "yeux lourds", "j'ai sommeil",
-        "pas dormi", "mal dormi", "nuit blanche",
-        "conduis depuis", "roule depuis",
-        r"\d+\s*h(eures)?",          # matches "5h", "5 heures"
-        r"\d+\s*heure(s)?",
-    ],
-
-    "nuit": [
-        "nuit", "nocturne", "soir", "minuit",
-        "23h", "22h", "21h", "00h", "01h", "02h", "03h", "04h",
-        "obscurité", "noir", "pas de lumière",
-        "après minuit", "très tard",
-        r"2[0-3]h", r"0[0-6]h",      # regex for night hours 20h-06h
-    ],
-
-    "pluie": [
-        "pluie", "pleut", "pluvieux", "mouillé",
-        "brouillard", "brume", "verglas",
-        "neige", "grêle", "tempête",
-        "chaussée glissante", "route mouillée",
-        "mauvais temps", "visibilité réduite",
-    ],
-
-    "vitesse": [
-        "vite", "trop vite", "vitesse",
-        "dépasse", "dépassement", "accélère",
-        r"1[3-9]\d\s*km",            # 130-199 km/h
-        r"2\d{2}\s*km",              # 200+ km/h
-        "fonce", "rapide", "à fond",
-    ],
-
-    "telephone": [
-        "téléphone", "portable", "smartphone",
-        "texto", "sms", "message", "appel",
-        "whatsapp", "instagram", "réseaux",
-        "navigation", "gps", "maps",
-        "regarde mon téléphone", "écran",
-    ],
-
-    "alcool": [
-        "alcool", "bu", "bière", "vin", "whisky",
-        "verre", "soirée", "fête", "bar",
-        "alcoolisé", "ivre", "soul",
-        "apéro", "alcoolémie",
-    ],
-
-    "medicaments": [
-        "médicament", "comprimé", "pilule",
-        "somnifère", "anxiolytique", "antihistaminique",
-        "doliprane", "lexomil", "xanax",
-        "ordonnance", "traitement", "antidépresseur",
-    ],
-
-    "trafic": [
-        "embouteillage", "bouchon", "trafic",
-        "dense", "ralenti", "arrêté",
-        "autoroute", "beaucoup de voitures",
-        "heure de pointe", "rush",
-    ],
-
-    "longue_distance": [
-        "long trajet", "longue route", "longue distance",
-        "voyage", "des heures", "toute la journée",
-        r"\d+\s*km",                 # any km mention
-        "aller-retour", "traverser",
-    ],
+VALID_RISK_FACTORS = {
+    "fatigue", "nuit", "pluie", "vitesse", "telephone",
+    "alcool", "medicaments", "trafic", "longue_distance",
 }
 
+VALID_INFRACTIONS = {
+    "feu_rouge", "excès_vitesse", "stationnement_interdit",
+    "ceinture", "telephone_volant", "alcool_volant",
+    "defaut_assurance", "defaut_controle_technique",
+    "refus_priorite", "sens_interdit", "depassement_interdit",
+}
+
+VALID_EMERGENCIES = {"accident", "blessé", "panne", "fuite", "incendie"}
+
+# Synonyms the LLM might return → canonical form
+FACTOR_SYNONYMS = {
+    "somnolence": "fatigue", "endormissement": "fatigue",
+    "épuisement": "fatigue", "nuit noire": "nuit",
+    "météo": "pluie", "intempéries": "pluie", "verglas": "pluie",
+    "excès de vitesse": "vitesse", "trop vite": "vitesse",
+    "portable": "telephone", "smartphone": "telephone",
+    "distraction": "telephone", "ivre": "alcool", "bu": "alcool",
+    "somnifère": "medicaments", "traitement": "medicaments",
+    "embouteillage": "trafic", "bouchon": "trafic",
+    "long trajet": "longue_distance", "voyage": "longue_distance",
+}
+
+INFRACTION_SYNONYMS = {
+    "feu rouge grillé": "feu_rouge",
+    "griller feu": "feu_rouge",
+    "radar": "excès_vitesse",
+    "flashé": "excès_vitesse",
+    "pas de ceinture": "ceinture",
+    "sans assurance": "defaut_assurance",
+    "visite technique": "defaut_controle_technique",
+    "ligne continue": "depassement_interdit",
+    "contresens": "sens_interdit",
+}
 
 # ─────────────────────────────────────────────
-#  NUMBER EXTRACTOR (for hours driven)
+#  NUMERIC EXTRACTORS
 # ─────────────────────────────────────────────
 
 def extract_hours_driven(text: str) -> float | None:
-    """Extract how many hours the person has been driving."""
     patterns = [
-        r"depuis\s+(\d+(?:\.\d+)?)\s*h",          # depuis 5h
-        r"(\d+(?:\.\d+)?)\s*heure[s]?\s+de conduite",
+        r"depuis\s+(\d+(?:[.,]\d+)?)\s*h",
+        r"(\d+(?:[.,]\d+)?)\s*heure[s]?\s+de conduite",
         r"condui[st]\s+depuis\s+(\d+)",
         r"roule[s]?\s+depuis\s+(\d+)",
-        r"(\d+)h\s+(?:de|sur)\s+la route",
+        r"(\d+)\s*h\s+(?:de|sur)\s+la route",
     ]
-    for pattern in patterns:
-        match = re.search(pattern, text.lower())
-        if match:
-            return float(match.group(1))
+    for p in patterns:
+        m = re.search(p, text.lower())
+        if m:
+            return float(m.group(1).replace(",", "."))
     return None
 
-
-# ─────────────────────────────────────────────
-#  HOUR EXTRACTOR (for time of day)
-# ─────────────────────────────────────────────
 
 def extract_time_of_day(text: str) -> int | None:
-    """Extract current hour from text (returns 0-23)."""
-    patterns = [
-        r"(\d{1,2})\s*h(?:eure)?s?",     # 23h, 23 heures
-        r"il est\s+(\d{1,2})",
-        r"(\d{1,2}):(\d{2})",             # 23:00
-    ]
-    for pattern in patterns:
-        match = re.search(pattern, text.lower())
-        if match:
-            hour = int(match.group(1))
-            if 0 <= hour <= 23:
-                return hour
+    m = re.search(r"\b(\d{1,2})\s*h(?:eure)?s?\b", text.lower())
+    if m:
+        h = int(m.group(1))
+        if 0 <= h <= 23:
+            return h
+    m = re.search(r"\b(\d{1,2}):(\d{2})\b", text)
+    if m:
+        return int(m.group(1))
+    return None
+
+
+def extract_speed_value(text: str) -> int | None:
+    m = re.search(r"(\d{2,3})\s*km(?:/h)?", text.lower())
+    if m:
+        return int(m.group(1))
     return None
 
 
 # ─────────────────────────────────────────────
-#  MAIN EXTRACTOR FUNCTION
+#  NORMALISATION
 # ─────────────────────────────────────────────
 
-def extract_risk_factors(text: str) -> dict:
-    """
-    Main function: analyze a French text and return all detected risk factors.
+def normalise_factors(raw: list) -> list:
+    """Map LLM-produced factor strings → canonical vocabulary."""
+    out = []
+    for item in raw:
+        item = item.lower().strip()
+        canonical = FACTOR_SYNONYMS.get(item, item)
+        if canonical in VALID_RISK_FACTORS and canonical not in out:
+            out.append(canonical)
+    return out
 
-    Args:
-        text: Raw user input in French
 
-    Returns:
-        dict with:
-          - 'factors': list of detected risk category names
-          - 'hours_driven': float or None
-          - 'time_of_day': int (hour 0-23) or None
-          - 'entities': spaCy named entities found
-          - 'raw_text': original input
-    """
-    text_lower = text.lower()
-    detected_factors = []
+def normalise_infractions(raw: list) -> list:
+    out = []
+    for item in raw:
+        item = item.lower().strip()
+        canonical = INFRACTION_SYNONYMS.get(item, item)
+        if canonical in VALID_INFRACTIONS and canonical not in out:
+            out.append(canonical)
+    return out
 
-    # ── 1. Keyword matching ──────────────────
-    for category, keywords in RISK_KEYWORDS.items():
-        for kw in keywords:
-            # Check if keyword is a regex pattern
-            if kw.startswith(r"\d") or kw.startswith(r"[") or kw.startswith(r"2") and "\\" in kw:
-                if re.search(kw, text_lower):
-                    if category not in detected_factors:
-                        detected_factors.append(category)
-                    break
-            else:
-                if kw in text_lower:
-                    if category not in detected_factors:
-                        detected_factors.append(category)
-                    break
 
-    # ── 2. Special rule: hours driven ────────
-    hours = extract_hours_driven(text)
-    if hours is not None and hours >= 2.0:
-        if "fatigue" not in detected_factors:
-            detected_factors.append("fatigue")
-        if hours >= 4.0 and "longue_distance" not in detected_factors:
-            detected_factors.append("longue_distance")
+def normalise_emergencies(raw: list) -> list:
+    out = []
+    for item in raw:
+        item = item.lower().strip()
+        if item in VALID_EMERGENCIES and item not in out:
+            out.append(item)
+    return out
 
-    # ── 3. Special rule: night hours ─────────
-    hour = extract_time_of_day(text)
+
+# ─────────────────────────────────────────────
+#  AUTO-AUGMENT FROM NUMERIC VALUES
+# ─────────────────────────────────────────────
+
+def augment_factors(factors: list, hours: float | None, hour: int | None) -> list:
+    """Infer additional factors from numeric extractions."""
+    factors = list(factors)
+    if hours is not None:
+        if hours >= 2.0 and "fatigue" not in factors:
+            factors.append("fatigue")
+        if hours >= 4.0 and "longue_distance" not in factors:
+            factors.append("longue_distance")
     if hour is not None and (hour >= 20 or hour <= 6):
-        if "nuit" not in detected_factors:
-            detected_factors.append("nuit")
+        if "nuit" not in factors:
+            factors.append("nuit")
+    return factors
 
-    # ── 4. spaCy NER (bonus entities) ────────
-    doc = nlp(text)
-    entities = [(ent.text, ent.label_) for ent in doc.ents]
+
+# ─────────────────────────────────────────────
+#  FAST KEYWORD PRE-FILTER  (no LLM needed)
+# ─────────────────────────────────────────────
+
+# Maps a keyword that appears in text → factor/infraction/emergency it signals
+_FAST_RISK = {
+    "fatigué": "fatigue", "somnol": "fatigue", "endorm": "fatigue",
+    "bâille": "fatigue", "yeux lourds": "fatigue", "sommeil": "fatigue",
+    "pleut": "pluie", "pluie": "pluie", "brouillard": "pluie",
+    "verglas": "pluie", "inondé": "pluie",
+    "nuit": "nuit", "soir": "nuit",
+    "téléphone": "telephone", "portable": "telephone", "sms": "telephone",
+    "alcool": "alcool", "bu ": "alcool", "verre ": "alcool", "ivre": "alcool",
+    "médicament": "medicaments", "comprimé": "medicaments",
+    "bouchon": "trafic", "embouteillage": "trafic",
+    "long trajet": "longue_distance", "depuis des heures": "longue_distance",
+    "vite": "vitesse", "vitesse": "vitesse",
+}
+_FAST_INFRACTION = {
+    "feu rouge": "feu_rouge", "grillé": "feu_rouge",
+    "flashé": "excès_vitesse", "radar": "excès_vitesse",
+    "sans ceinture": "ceinture", "ceinture": "ceinture",
+    "sans assurance": "defaut_assurance", "assurance": "defaut_assurance",
+    "contrôle technique": "defaut_controle_technique",
+    "sens interdit": "sens_interdit",
+}
+_FAST_EMERGENCY = {
+    "accident": "accident", "blessé": "blessé", "collision": "accident",
+    "panne": "panne", "crevaison": "panne", "en feu": "incendie",
+    "incendie": "incendie", "fuite": "fuite",
+}
+
+
+def fast_keyword_scan(text: str) -> dict:
+    """
+    Quick keyword scan to give the LLM a head-start and provide a
+    fallback if the LLM is unavailable.
+    Returns raw (non-normalised) lists.
+    """
+    tl = text.lower()
+    factors, infractions, emergencies = [], [], []
+    for kw, cat in _FAST_RISK.items():
+        if kw in tl and cat not in factors:
+            factors.append(cat)
+    for kw, cat in _FAST_INFRACTION.items():
+        if kw in tl and cat not in infractions:
+            infractions.append(cat)
+    for kw, cat in _FAST_EMERGENCY.items():
+        if kw in tl and cat not in emergencies:
+            emergencies.append(cat)
+
+    hours = extract_hours_driven(text)
+    hour  = extract_time_of_day(text)
+    speed = extract_speed_value(text)
+
+    factors = augment_factors(factors, hours, hour)
 
     return {
-        "factors": detected_factors,
+        "factors":     factors,
+        "infractions": infractions,
+        "emergencies": emergencies,
         "hours_driven": hours,
-        "time_of_day": hour,
-        "entities": entities,
-        "raw_text": text,
+        "time_of_day":  hour,
+        "speed_value":  speed,
     }
-# ─────────────────────────────────────────────
-#  QUICK TEST  (run: python extractor.py)
-# ─────────────────────────────────────────────
-
-if __name__ == "__main__":
-    test_inputs = [
-        "Je conduis depuis 5 heures, il est 23h et il pleut fort.",
-        "J'ai bu 2 verres de vin et je dois rentrer.",
-        "Je suis sur mon téléphone depuis tout à l'heure, je roule vite.",
-        "Je me sens très fatigué, j'ai pas dormi la nuit dernière.",
-        "Trafic dense sur l'autoroute, je roule depuis 6h.",
-    ]
-
-    print("=" * 60)
-    print("EXTRACTOR TEST")
-    print("=" * 60)
-
-    for text in test_inputs:
-        result = extract_risk_factors(text)
-        print(f"\n📝 Input : {text}")
-        print(f"⚠️  Factors: {result['factors']}")
-        if result['hours_driven']:
-            print(f"🕐 Hours driven: {result['hours_driven']}h")
-        if result['time_of_day'] is not None:
-            print(f"🌙 Time of day: {result['time_of_day']}h")

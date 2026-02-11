@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────
+# Road Safety AI — Tunisia
+# Install: pip install -r requirements.txt
+# ─────────────────────────────────────────────────────
+
+# Core NLP & Embeddings
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+
+# LLM backends (install the one(s) you use)
+openai>=1.0.0          # optional — needs OPENAI_API_KEY
+mistralai>=0.1.0       # optional — needs MISTRAL_API_KEY
+# Ollama is free & local — see https://ollama.ai (no pip install needed)
+
+# Web API (optional)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# HTTP (for Ollama calls)
+requests>=2.31.0
+
+# Utilities
+numpy>=1.24.0
+python-dotenv>=1.0.0

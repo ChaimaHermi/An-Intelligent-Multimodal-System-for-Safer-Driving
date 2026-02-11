@@ -1,0 +1,702 @@
+[
+  {
+    "id": "r001", "category": "fatigue", "subcategory": "microsommeil",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Observatoire National de la Sécurité Routière",
+    "tags": ["autoroute", "nuit", "longue_distance"],
+    "text": "En Tunisie, la fatigue au volant est impliquée dans 28% des accidents mortels sur les routes interurbaines. La microsommeil (endormissement involontaire de 2 à 10 secondes) à 100 km/h représente jusqu'à 280 mètres parcourus sans contrôle du véhicule."
+  },
+  {
+    "id": "r002", "category": "fatigue", "subcategory": "seuils_temps",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 47",
+    "tags": ["longue_distance", "prevention"],
+    "text": "Il est fortement recommandé de faire une pause d'au moins 20 minutes toutes les 2 heures de conduite. Après 4 heures consécutives de conduite sans pause, le risque d'accident est multiplié par 6. Ces recommandations s'appliquent sur toutes les routes de Tunisie."
+  },
+  {
+    "id": "r003", "category": "fatigue", "subcategory": "remedes",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Études neurologie du sommeil — Institut Pasteur Tunis",
+    "tags": ["prevention"],
+    "text": "Le seul remède efficace contre la somnolence au volant est l'arrêt et le sommeil. Le café, la musique forte, l'air frais ou les sucreries retardent la somnolence de 20 à 30 minutes au maximum mais ne la supprimem pas et donnent une fausse impression de vigilance."
+  },
+  {
+    "id": "r004", "category": "fatigue", "subcategory": "alcool_equivalent",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Études scientifiques sur la privation de sommeil",
+    "tags": ["nuit"],
+    "text": "Conduire après 20 heures sans dormir équivaut physiologiquement à conduire avec 0.5g/L d'alcool dans le sang. Les réflexes sont diminués de 40% et le temps de réaction est presque doublé."
+  },
+  {
+    "id": "r005", "category": "fatigue", "subcategory": "ramadan",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Rapport Ramadan 2022",
+    "tags": ["ramadan", "nuit", "saisonnier"],
+    "text": "Durant le Ramadan en Tunisie, les accidents augmentent de 35% dans les 60 minutes précédant l'Iftar (fatigue du jeûne + hypoglycémie) et dans les 90 minutes qui suivent (somnolence post-repas). Évitez absolument de conduire durant ces créneaux."
+  },
+  {
+    "id": "r006", "category": "fatigue", "subcategory": "chaleur",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Direction Générale de la Médecine du Travail Tunisie",
+    "tags": ["ete", "chaleur", "saisonnier"],
+    "text": "En été tunisien (juin–septembre), la chaleur excessive (40°C+) en voiture sans climatisation provoque une fatigue rapide et des troubles de la concentration. Hydratez-vous avec au moins 1,5L d'eau avant et pendant tout trajet dépassant 1 heure."
+  },
+  {
+    "id": "r007", "category": "fatigue", "subcategory": "sieste_efficace",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Sécurité Routière — Conseils pratiques",
+    "tags": ["autoroute", "prevention"],
+    "text": "La sieste de 15 à 20 minutes est la plus efficace contre la somnolence au volant. Au-delà de 30 minutes, vous entrez dans un cycle de sommeil profond et vous réveillez dans un état d'inertie encore plus dangereux. Idéalement : café + sieste de 20 min immédiatement après."
+  },
+  {
+    "id": "r008", "category": "fatigue", "subcategory": "heures_risque",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Chronobiologie — Études sur les rythmes circadiens",
+    "tags": ["nuit"],
+    "text": "Le risque de somnolence est maximal entre 2h et 5h du matin (pic de sommeil naturel) et entre 13h et 15h (après-déjeuner). Évitez de conduire durant ces créneaux si vous vous sentez fatigué, surtout sur les longs trajets Tunis–Sfax ou Tunis–Gabès."
+  },
+  {
+    "id": "r009", "category": "fatigue", "subcategory": "symptomes",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["prevention", "detection"],
+    "text": "Signes précurseurs de la somnolence dangereux à reconnaître : bâillements répétés, yeux qui piquent, difficultés à maintenir la voie, réactions plus lentes, pensées qui s'emballent ou divaguent, oubli des derniers kilomètres parcourus. À la moindre apparition : arrêtez-vous."
+  },
+  {
+    "id": "r010", "category": "fatigue", "subcategory": "avant_depart",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Conseils pratiques ONISR",
+    "tags": ["longue_distance", "prevention"],
+    "text": "Avant un long trajet (Tunis–Sfax = 270 km, Tunis–Gabès = 380 km, Tunis–Tozeur = 450 km), dormez au moins 7 heures la nuit précédente. Partir le matin tôt après une nuit complète est toujours préférable à partir en soirée ou en début de nuit."
+  },
+  {
+    "id": "r011", "category": "nuit", "subcategory": "visibilite",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 53",
+    "tags": ["phares", "routes_rurales"],
+    "text": "En Tunisie, la grande majorité des routes rurales et interurbaines n'ont pas d'éclairage public. La nuit, la visibilité avec les feux de croisement est limitée à 30–50 mètres. Adaptez impérativement votre vitesse pour pouvoir stopper dans cette distance de visibilité."
+  },
+  {
+    "id": "r012", "category": "nuit", "subcategory": "statistiques_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Bilan annuel 2023",
+    "tags": ["statistiques"],
+    "text": "En Tunisie, 45% des accidents mortels surviennent la nuit entre 20h et 6h, alors que ce créneau ne représente que 12% du trafic total. Le risque d'accident mortel est 4 à 5 fois plus élevé la nuit que le jour sur les routes nationales tunisiennes."
+  },
+  {
+    "id": "r013", "category": "nuit", "subcategory": "animaux_errants",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Accidents spécifiques",
+    "tags": ["routes_rurales", "animaux"],
+    "text": "Les animaux errants (chameaux, bovins, moutons, chiens) sur les routes tunisiennes sont responsables de nombreux accidents nocturnes graves, particulièrement dans les régions de Sidi Bouzid, Kasserine, Jendouba et Kébili. La nuit sur ces axes : vitesse maximale recommandée 70 km/h avec feux de route activés."
+  },
+  {
+    "id": "r014", "category": "nuit", "subcategory": "phares",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 53-55",
+    "tags": ["phares", "reglementation"],
+    "text": "En Tunisie, les feux de route (pleins phares) sont obligatoires hors agglomération la nuit en l'absence d'éclairage public. Vous devez basculer en feux de croisement dès qu'un véhicule arrive en face à moins de 150 mètres. Défaut de feux : amende 20–50 DT."
+  },
+  {
+    "id": "r015", "category": "nuit", "subcategory": "routes_specifiques",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Retours d'expérience conducteurs — Routes tunisiennes",
+    "tags": ["autoroute", "routes_rurales"],
+    "text": "Routes à risque nocturne élevé en Tunisie : A3 (Tunis–Béja) — faible éclairage, virages dangereux. GP2 (Tunis–Kasserine via Siliana) — montagne, brouillard fréquent. GP14 (Gafsa–Tozeur) — mirage, routes désertes sans signalement. GP1 (Tunis–Gabès) — trafic de camions dense la nuit."
+  },
+  {
+    "id": "r016", "category": "nuit", "subcategory": "vitesse_recommandee",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["vitesse"],
+    "text": "La nuit en Tunisie, réduisez systématiquement votre vitesse : -20 km/h par rapport à la limite légale sur routes nationales (70 km/h au lieu de 90), -15 km/h sur autoroute (95 km/h au lieu de 110). Sur routes rurales sans éclairage : ne dépassez pas 60 km/h."
+  },
+  {
+    "id": "r017", "category": "nuit", "subcategory": "fatigue_combinee",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Études chronobiologie",
+    "tags": ["fatigue", "combinaison"],
+    "text": "Entre minuit et 6h du matin, même sans ressentir de fatigue particulière, les réflexes sont diminués de 20 à 30% en raison du rythme circadien naturel. Cette fatigue invisible est particulièrement traître car le conducteur ne la perçoit pas."
+  },
+  {
+    "id": "r018", "category": "pluie", "subcategory": "freinage",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Physique de l'accident — Tests homologués",
+    "tags": ["vitesse", "distances"],
+    "text": "Par temps de pluie, la distance de freinage est multipliée par 2. À 90 km/h sur chaussée mouillée, la distance d'arrêt totale passe de 81 mètres à environ 160 mètres. Augmentez systématiquement la distance de sécurité et réduisez de 20 km/h minimum."
+  },
+  {
+    "id": "r019", "category": "pluie", "subcategory": "aquaplaning",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Tests pneumatiques — Laboratoires certifiés",
+    "tags": ["vitesse", "pneus"],
+    "text": "L'aquaplaning (perte de contact pneu-route par film d'eau) survient à partir de 80 km/h sur chaussée recouverte d'eau. En cas d'aquaplaning : ne freinez pas brusquement, ne tournez pas le volant, relâchez progressivement l'accélérateur jusqu'à reprise du contact."
+  },
+  {
+    "id": "r020", "category": "pluie", "subcategory": "inondations_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Protection Civile Tunisie — Consignes officielles",
+    "tags": ["hiver", "oueds", "saisonnier"],
+    "text": "RÈGLE ABSOLUE EN TUNISIE : Ne traversez jamais un oued ou une zone inondée, même si la hauteur d'eau semble faible. 30 cm d'eau suffisent à emporter une voiture. Les oueds qui débordent le plus souvent : Oued Medjerda (Mateur/Medjez el Bab), Oued Miliane (Grombalia), Oued Souhil (Nabeul). En cas de doute : faites demi-tour."
+  },
+  {
+    "id": "r021", "category": "pluie", "subcategory": "zones_a_risque_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Cartographie des zones à risque",
+    "tags": ["hiver", "saisonnier", "regions"],
+    "text": "Zones tunisiennes les plus touchées par les inondations routières (octobre–février) : Ariana, Ben Arous (banlieue de Tunis), Cap Bon (Nabeul, Grombalia), Beja (vallée de la Medjerda). En période de pluies intenses, consultez la radio nationale (RTCI 106.7 FM) pour les alertes routières."
+  },
+  {
+    "id": "r022", "category": "pluie", "subcategory": "limite_vitesse_pluie",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien",
+    "tags": ["vitesse", "reglementation"],
+    "text": "En Tunisie, par forte pluie ou brouillard dense (visibilité inférieure à 50 mètres), la vitesse maximale est de 50 km/h sur toutes les voies, indépendamment de la limitation normale. Sur les routes nationales inondées : arrêt ou demi-tour obligatoire."
+  },
+  {
+    "id": "r023", "category": "pluie", "subcategory": "brouillard_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Direction de la Météorologie Nationale Tunisie",
+    "tags": ["hiver", "cap_bon", "saisonnier"],
+    "text": "Le brouillard dense est fréquent en Tunisie d'octobre à décembre sur le corridor Cap Bon–Nabeul–Hammamet–Sousse et dans les vallées (Béja, Bousalem). La visibilité peut tomber à moins de 20 mètres. Allumez les feux antibrouillard, réduisez à 50 km/h maximum, augmentez les distances."
+  },
+  {
+    "id": "r024", "category": "pluie", "subcategory": "premiere_pluie",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["saisonnier", "automne"],
+    "text": "Les premières pluies d'automne en Tunisie (septembre–octobre) sont particulièrement dangereuses : l'huile accumulée sur la chaussée en été se mélange à l'eau et crée une surface extrêmement glissante. La distance de freinage peut être multipliée par 3. Ralentissez impérativement lors des premières pluies de la saison."
+  },
+  {
+    "id": "r025", "category": "vitesse", "subcategory": "limites_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 56-62 + Décret 1999-2863",
+    "tags": ["reglementation", "sanctions"],
+    "text": "Limites de vitesse officielles en Tunisie : 50 km/h en agglomération, 70 km/h en zone périurbaine (panneaux spécifiques), 90 km/h sur routes nationales (GP) hors agglomération, 110 km/h sur autoroutes (A1, A3, A4, A8, A9). Ces limites s'appliquent par temps sec et de nuit."
+  },
+  {
+    "id": "r026", "category": "vitesse", "subcategory": "radars_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Ministère de l'Intérieur Tunisie — Radars fixes",
+    "tags": ["sanctions", "autoroute"],
+    "text": "Radars fixes sur les autoroutes tunisiennes : A1 (Tunis–Msaken) : Pont de Bou Argoub km 62, Enfida km 120, Msaken km 210. A3 (Tunis–Béja) : Medjez el Bab km 45. A4 (Tunis–Bizerte) : Borj Cedria km 25. Des radars mobiles sont déployés régulièrement sur les GP1, GP7 et GP11."
+  },
+  {
+    "id": "r027", "category": "vitesse", "subcategory": "statistiques_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Bilan 2023",
+    "tags": ["statistiques"],
+    "text": "En Tunisie, l'excès de vitesse est impliqué dans 42% des accidents mortels. Les routes les plus meurtrières : GP1 (axe Tunis–Sfax–Gabès), GP7 (Kairouan–Gafsa), GP11 (Kasserine–Sbeitla). Ces axes combinent vitesse élevée, trafic de camions et absence de séparateur central."
+  },
+  {
+    "id": "r028", "category": "vitesse", "subcategory": "energie_cinetique",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Physique de l'accident — Loi de l'énergie cinétique",
+    "tags": ["pedagogie"],
+    "text": "L'énergie cinétique évolue au carré de la vitesse. Passer de 90 km/h à 110 km/h n'augmente la vitesse que de 22%, mais augmente l'énergie d'impact de 50%. À 110 km/h, un piéton heurté a 0% de chance de survie. À 50 km/h, cette chance monte à 90%."
+  },
+  {
+    "id": "r029", "category": "vitesse", "subcategory": "adaptation",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Code de la Route Tunisien — Art. 57",
+    "tags": ["pluie", "nuit", "trafic"],
+    "text": "La limitation de vitesse est un maximum légal, pas un objectif à atteindre. Le conducteur doit adapter sa vitesse aux conditions réelles : état de la chaussée (mouillée, dégradée), visibilité (nuit, pluie, brouillard), densité du trafic, présence de piétons, état du véhicule."
+  },
+  {
+    "id": "r030", "category": "vitesse", "subcategory": "camions_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Ministère des Transports Tunisie",
+    "tags": ["routes_nationales", "nuit"],
+    "text": "Sur les routes tunisiennes, notamment GP1 et GP11, le trafic de camions (poids lourds chargés) est très dense la nuit. Un poids lourd à pleine charge avec remorque a une distance d'arrêt de 200+ mètres à 90 km/h. Ne doublez jamais un poids lourd dans un virage ou en côte sur ces axes."
+  },
+  {
+    "id": "r031", "category": "vitesse", "subcategory": "dos_ane_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Constats d'accidents routiers tunisiens",
+    "tags": ["routes_locales", "agglomeration"],
+    "text": "Les dos d'âne et ralentisseurs en Tunisie sont souvent non signalés, mal peints ou de hauteur excessive. Les zones à surveiller particulièrement : traversées de villages sur les GP, sorties d'écoles, entrées de zones industrielles. Vitesse maximale recommandée à l'approche : 20 km/h."
+  },
+  {
+    "id": "r032", "category": "telephone", "subcategory": "risque_scientifique",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Études NHTSA & WHO — Distraction au volant",
+    "tags": ["distraction"],
+    "text": "L'utilisation du téléphone en conduisant multiplie le risque d'accident par 3 à 4. Lire ou envoyer un SMS au volant détourne les yeux de la route pendant en moyenne 5 secondes. À 90 km/h, cela correspond à 125 mètres parcourus les yeux fermés."
+  },
+  {
+    "id": "r033", "category": "telephone", "subcategory": "loi_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 94",
+    "tags": ["sanctions", "reglementation"],
+    "text": "En Tunisie, tenir un téléphone en conduisant est sanctionné par une amende de 40 à 100 DT et un retrait de 2 points sur le permis. L'infraction s'applique même à l'arrêt au feu rouge ou dans un embouteillage. Seul le kit mains-libres intégré au tableau de bord est légalement toléré."
+  },
+  {
+    "id": "r034", "category": "telephone", "subcategory": "mains_libres",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Études cognitives — Attention partagée",
+    "tags": ["distraction"],
+    "text": "Même avec un kit mains-libres légal, une conversation téléphonique réduire la capacité d'attention du conducteur de 35 à 40%. La conversation téléphonique est plus distrayante qu'une conversation avec un passager car l'interlocuteur au téléphone ne voit pas la route et ne s'adapte pas aux situations de danger."
+  },
+  {
+    "id": "r035", "category": "telephone", "subcategory": "navigation_gps",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Sécurité Routière",
+    "tags": ["distraction", "pratique"],
+    "text": "L'utilisation d'applications de navigation (Google Maps, Waze) nécessite de programmer le trajet avant de démarrer. Manipuler le GPS en conduisant est aussi dangereux que tenir un téléphone. En Tunisie, les adresses GPS sont souvent imprécises : préparez votre itinéraire à l'avance."
+  },
+  {
+    "id": "r036", "category": "telephone", "subcategory": "mode_conduite",
+    "severity": "low", "jurisdiction": "ALL",
+    "source": "Conseils pratiques numériques",
+    "tags": ["prevention", "pratique"],
+    "text": "Activez le mode 'Ne pas déranger en voiture' (disponible sur iOS et Android) avant de prendre le volant. Ce mode bloque automatiquement les notifications et peut envoyer une réponse automatique aux appelants. Posez votre téléphone dans la boîte à gants ou dans un support fixe hors de portée directe."
+  },
+  {
+    "id": "r037", "category": "alcool", "subcategory": "loi_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 72-78 + Code Pénal",
+    "tags": ["sanctions", "reglementation"],
+    "text": "En Tunisie, le taux d'alcoolémie légal est de 0.3g/L de sang (plus strict que la plupart des pays européens). Au-delà de 0.3g/L : suspension immédiate du permis 1 à 6 mois + amende 300–1000 DT. En cas d'accident sous alcool : emprisonnement de 1 à 5 ans (Code Pénal tunisien Art. 284)."
+  },
+  {
+    "id": "r038", "category": "alcool", "subcategory": "effets_physiologiques",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "INSAT — Études pharmacologiques",
+    "tags": ["pedagogie"],
+    "text": "Dès 0.3g/L d'alcool (2 verres standard), les réflexes ralentissent de 15%, la vision périphérique se rétrécit de 20%, le jugement des distances est altéré et la tendance à la prise de risque augmente. Le conducteur surestime ses capacités alors qu'elles sont objectivement diminuées."
+  },
+  {
+    "id": "r039", "category": "alcool", "subcategory": "elimination",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Pharmacologie — Métabolisme de l'alcool",
+    "tags": ["pratique"],
+    "text": "Le corps élimine l'alcool à raison de 0.10 à 0.15g/L par heure en moyenne. Ni le café, ni l'eau froide, ni l'exercice physique n'accélèrent ce processus. Après 3 verres standard (0.45g/L estimé), il faut attendre au moins 3 à 4 heures avant que le taux repasse sous la limite tunisienne de 0.3g/L."
+  },
+  {
+    "id": "r040", "category": "alcool", "subcategory": "controles_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Ministère de l'Intérieur Tunisie",
+    "tags": ["sanctions", "checkpoints"],
+    "text": "En Tunisie, les contrôles d'alcoolémie sont fréquents : sorties de week-end (vendredi–samedi soir), fêtes nationales (21 mars, 25 juillet, 13 août), sorties de stade, sorties de discothèques et bars. Le refus de souffler dans l'éthylomètre est une infraction supplémentaire passible d'amende et d'emprisonnement."
+  },
+  {
+    "id": "r041", "category": "alcool", "subcategory": "alternatives_tn",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Conseils pratiques Tunisie",
+    "tags": ["prevention", "pratique"],
+    "text": "Alternatives à la conduite après consommation d'alcool en Tunisie : Bolt (disponible à Tunis, Sfax, Sousse, Monastir), InDriver, taxis conventionnels (71 34 34 34 à Tunis), taxi collectif (louage). Désignez toujours un conducteur sobre avant de sortir. Ne conduisez jamais après avoir bu, même un seul verre."
+  },
+  {
+    "id": "r042", "category": "alcool", "subcategory": "lendemain",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Études cliniques sur l'alcoolémie résiduelle",
+    "tags": ["matin", "prevention"],
+    "text": "L'alcool consommé le soir peut encore être présent dans le sang le lendemain matin. Après une soirée avec 5 à 6 verres, l'alcoolémie peut encore dépasser 0.3g/L à 8h du matin. Si vous avez beaucoup bu la veille, attendez au minimum 8 à 10 heures avant de conduire."
+  },
+  {
+    "id": "r043", "category": "medicaments", "subcategory": "pictogrammes_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Ministère de la Santé Publique Tunisie — Circulaire 2018",
+    "tags": ["reglementation", "prevention"],
+    "text": "En Tunisie, les médicaments dangereux pour la conduite sont signalés par un pictogramme : Catégorie 1 (jaune) = effets possibles, conduire avec précaution. Catégorie 2 (orange) = effets importants, ne pas conduire sans avis médical. Catégorie 3 (rouge) = effets majeurs, ne PAS conduire. Consultez toujours votre pharmacien."
+  },
+  {
+    "id": "r044", "category": "medicaments", "subcategory": "medicaments_courants",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Pharmacologie clinique",
+    "tags": ["liste", "prevention"],
+    "text": "Médicaments couramment vendus en Tunisie pouvant altérer la conduite : antihistaminiques (Primalan, Polaramine — somnolence), benzodiazépines (Diazepam, Lexomil — sédation forte), antidouleurs codéinés (Dafalgan Codéine), médicaments contre le rhume (Actifed, Rhinadvil — vertiges). Lisez TOUJOURS la notice."
+  },
+  {
+    "id": "r045", "category": "medicaments", "subcategory": "cannabis",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien + Code Pénal",
+    "tags": ["stupéfiants", "sanctions"],
+    "text": "En Tunisie, conduire sous l'influence du cannabis est une infraction pénale grave. Les effets sur la conduite incluent : ralentissement des réflexes, mauvaise estimation des distances et vitesses, somnolence, troubles de la concentration. Peine : emprisonnement + suspension de permis. Le cannabis reste détectable dans le sang jusqu'à 30 jours."
+  },
+  {
+    "id": "r046", "category": "medicaments", "subcategory": "conseils",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["prevention", "pratique"],
+    "text": "Si vous devez conduire sous traitement médical : consultez votre médecin ou pharmacien avant. Évitez les prises juste avant de conduire (attendez que les effets se stabilisent). Ne jamais combiner médicaments + alcool + conduite. En cas de doute, prenez un taxi ou demandez à quelqu'un de vous conduire."
+  },
+  {
+    "id": "r047", "category": "trafic", "subcategory": "tunis",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Ministère des Transports Tunisie — Étude trafic 2022",
+    "tags": ["tunis", "heure_de_pointe"],
+    "text": "Les heures de pointe à Tunis : 7h30–9h30 (entrée ville) et 17h00–19h30 (sortie ville). Les axes les plus engorgés : Avenue Habib Bourguiba, Avenue Mohamed V, La Marsa–Tunis (TGM), Route de La Goulette, Ariana–Tunis. Temps de parcours multiplié par 3 en heure de pointe. Utilisez Waze ou Google Maps pour éviter les bouchons."
+  },
+  {
+    "id": "r048", "category": "trafic", "subcategory": "distance_securite",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 65",
+    "tags": ["regle_2_secondes"],
+    "text": "La règle des 2 secondes en trafic : maintenez une distance correspondant à au moins 2 secondes de trajet avec le véhicule devant. En trafic dense à Tunis ou Sfax, maintenez minimum 3 mètres à basse vitesse. En cas de pluie ou de nuit, doublez cette distance. Les accidents arrière représentent 25% des accidents en ville en Tunisie."
+  },
+  {
+    "id": "r049", "category": "trafic", "subcategory": "motos_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie + Observations terrain",
+    "tags": ["motos", "vigilance"],
+    "text": "En Tunisie, les motos et scooters représentent 35 à 40% du parc roulant urbain et 45% des tués sur la route. En ville, vérifiez systématiquement vos angles morts avant de changer de voie : une moto peut surgir entre les véhicules. Le comportement imprévisible des deux-roues est une réalité quotidienne sur les routes tunisiennes."
+  },
+  {
+    "id": "r050", "category": "trafic", "subcategory": "ronds_points_tn",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 35",
+    "tags": ["priorite", "reglementation"],
+    "text": "En Tunisie, la règle de priorité dans les carrefours giratoires (ronds-points) est : priorité aux véhicules déjà engagés dans le giratoire (règle de priorité à gauche). Cependant, cette règle est fréquemment méconnue ou ignorée. Abordez toujours un rond-point avec prudence et vérifiez même si vous avez théoriquement la priorité."
+  },
+  {
+    "id": "r051", "category": "trafic", "subcategory": "piétons",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie",
+    "tags": ["piétons", "agglomeration"],
+    "text": "Les piétons représentent 25% des tués sur les routes tunisiennes. Les traversées hors des passages piétons sont très fréquentes. Dans les medinas (Tunis, Sfax, Sousse), les ruelles étroites sont partagées avec les piétons. Vitesse maximale dans ces zones : 20 km/h avec vigilance maximale."
+  },
+  {
+    "id": "r052", "category": "longue_distance", "subcategory": "axes_principaux_tn",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Guide des routes tunisiennes",
+    "tags": ["planification"],
+    "text": "Distances et durées estimées au départ de Tunis (conditions normales) : Sfax = 270 km / 3h. Sousse = 140 km / 1h45. Bizerte = 65 km / 50min. Kairouan = 155 km / 1h45. Gabès = 380 km / 4h15. Tozeur = 450 km / 5h. Djerba = 510 km / 5h30. Planifiez vos pauses en conséquence : au moins 1 pause pour Sfax, 2 pour Tozeur/Djerba."
+  },
+  {
+    "id": "r053", "category": "longue_distance", "subcategory": "preparation",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Conseils pratiques Tunisie",
+    "tags": ["planification", "prevention"],
+    "text": "Avant un long trajet en Tunisie : vérifiez le niveau d'huile, d'eau et de carburant (stations parfois éloignées en régions du Sud), état des pneus et pression (chaleur = pression augmente). Pour Tozeur ou le Sahara : emportez 5L d'eau minimum, chargeur de téléphone, triangle de signalisation, gilet fluorescent."
+  },
+  {
+    "id": "r054", "category": "longue_distance", "subcategory": "pauses",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["fatigue", "planification"],
+    "text": "Planifiez vos pauses en identifiant les points de repos sur votre itinéraire tunisien : Stations Agil, Shell, Total et indépendantes sur les autoroutes et GP. Restopolis (aires d'autoroute A1). Cafés sur les grandes villes traversées. Une pause doit durer au minimum 15 à 20 minutes hors du véhicule, avec marche à pied."
+  },
+  {
+    "id": "r055", "category": "longue_distance", "subcategory": "nuit_vs_jour",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie",
+    "tags": ["nuit", "strategie"],
+    "text": "Si possible en Tunisie, évitez les longs trajets de nuit. Sur l'A1 Tunis–Sfax de nuit : faible éclairage, nombreux poids lourds roulant lentement sans signalisation adéquate, présence de véhicules sans feux. Si vous devez conduire de nuit, roulez à vitesse réduite et restez constamment alerté."
+  },
+  {
+    "id": "r056", "category": "longue_distance", "subcategory": "sud_tunisien",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Guide du Sud tunisien — Consignes de sécurité",
+    "tags": ["desert", "chaleur", "ete"],
+    "text": "Vers le Sud tunisien (Douz, Tozeur, Kébili) en été : la chaleur peut atteindre 48°C. Risques spécifiques : mirages optiques sur la chaussée (difficile d'estimer les distances), pneumatiques surchauffés (risque d'éclatement), moteur en surchauffe. Roulez de préférence tôt le matin (5h–10h) ou en soirée (19h–21h). Emportez toujours de l'eau et un téléphone chargé."
+  },
+  {
+    "id": "r057", "category": "moto", "subcategory": "statistiques_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Bilan 2023",
+    "tags": ["statistiques", "deux_roues"],
+    "text": "En Tunisie, les motocyclistes et cyclomotoristes représentent 42% des tués sur la route alors qu'ils ne représentent que 35% du parc roulant. Les trois principales causes de décès à moto : absence de casque (47% des cas), excès de vitesse, et non-respect des priorités. Porter le casque est obligatoire et réduit le risque de décès de 40%."
+  },
+  {
+    "id": "r058", "category": "moto", "subcategory": "casque_loi",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 89",
+    "tags": ["reglementation", "sanctions"],
+    "text": "En Tunisie, le port du casque homologué est obligatoire pour le conducteur et le passager d'une moto ou scooter. Amende en cas d'absence : 50 à 100 DT. Un casque de vélo ou un casque non homologué n'est pas légalement valable. Le casque doit être attaché (jugulaire fermée) pour être protecteur."
+  },
+  {
+    "id": "r059", "category": "moto", "subcategory": "angles_morts",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["vigilance", "deux_roues"],
+    "text": "Les motards tunisiens circulent souvent entre les files de voitures (pratique illégale mais fréquente). Conducteurs de voitures : avant tout changement de voie, vérifiez vos rétroviseurs ET tournez la tête pour vérifier l'angle mort. Un scooter à 50 km/h peut parcourir 14 mètres pendant votre seul regard aux rétroviseurs."
+  },
+  {
+    "id": "r060", "category": "moto", "subcategory": "visibilite_moto",
+    "severity": "high", "jurisdiction": "ALL",
+    "source": "Études sur la visibilité des deux-roues",
+    "tags": ["deux_roues", "nuit"],
+    "text": "Une moto est difficile à apercevoir en raison de son gabarit réduit. Les conducteurs de voitures sous-estiment souvent leur vitesse d'approche. La nuit, les phares de moto peuvent être confondus avec un véhicule lointain. Règle : doublez la distance de sécurité derrière une moto par rapport à une voiture."
+  },
+  {
+    "id": "r061", "category": "moto", "subcategory": "equipement",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Conseils Sécurité Moto Tunisie",
+    "tags": ["deux_roues", "prevention"],
+    "text": "Équipement recommandé pour les motards en Tunisie (au-delà du casque obligatoire) : gants (protègent mains en cas de chute), veste renforcée aux coudes et épaules, chaussures montantes. En ville à Tunis : portez toujours un gilet fluorescent visible des automobilistes. Coût moyen d'un équipement de base : 200–400 DT."
+  },
+  {
+    "id": "r062", "category": "moto", "subcategory": "pluie_moto",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Tests et études sur la conduite moto sous pluie",
+    "tags": ["pluie", "deux_roues"],
+    "text": "Sur une moto sous la pluie, la distance de freinage augmente de 50 à 70% selon le type de pneus. Les marquages au sol (lignes blanches, passages piétons) deviennent extrêmement glissants. Sur les routes tunisiennes souvent dégradées, les nids-de-poule remplis d'eau sont dangereux. Vitesse maximale recommandée sous la pluie à moto : -30 km/h par rapport à la limite normale."
+  },
+  {
+    "id": "r063", "category": "routes_tunisie", "subcategory": "a1",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "STAP — Société Tunisienne des Autoroutes et des Ponts",
+    "tags": ["autoroute", "tunis_sfax"],
+    "text": "Autoroute A1 Tunis–Msaken (250 km) : route la plus fréquentée de Tunisie. Points noirs : Pont de Bou Argoub (brouillard fréquent), échangeur Enfida (nombreux camions), entrée de Sousse (trafic dense). Péage obligatoire. Numéro d'urgence autoroute : 71 861 000. Bornes SOS oranges tous les 2 km."
+  },
+  {
+    "id": "r064", "category": "routes_tunisie", "subcategory": "gp1",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Routes dangereuses",
+    "tags": ["routes_nationales", "sfax_gabes"],
+    "text": "Route GP1 (Sfax–Gabès–Médenine) : route la plus meurtrière de Tunisie. Trafic de camions très dense (port de Sfax et Gabès), chaussée étroite sans séparateur central, nombreux points noirs à Skhira et El Hencha. Dépassements dangereux fréquents. Préférez l'autoroute A1 quand possible."
+  },
+  {
+    "id": "r065", "category": "routes_tunisie", "subcategory": "gp2_montagne",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Retours d'expérience et rapports d'accidents",
+    "tags": ["montagne", "hiver"],
+    "text": "Route GP2 (Tunis–Kasserine via Siliana et Le Kef) : traversée montagneuse de la Dorsale tunisienne. Risques : verglas en hiver (décembre–février) surtout sur les cols (Ain Draham, Kef), brouillard dense, chaussée dégradée dans les sections montagnardes. Vitesse maximale recommandée dans les cols : 60 km/h."
+  },
+  {
+    "id": "r066", "category": "routes_tunisie", "subcategory": "a4_bizerte",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Données Ministère des Transports Tunisie",
+    "tags": ["autoroute", "tunis_bizerte"],
+    "text": "Autoroute A4 Tunis–Bizerte (65 km) : trafic industriel important (port de Bizerte, zone industrielle Menzel Bourguiba). Présence fréquente de camions-citernes. Sortie péage Borj Cedria : point noir (visibilité réduite à la jonction). Évitez cet axe le vendredi après-midi (retours de Bizerte vers Tunis, trafic x3)."
+  },
+  {
+    "id": "r067", "category": "routes_tunisie", "subcategory": "tunis_urbain",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Ministère des Transports Tunisie — Plan de circulation",
+    "tags": ["tunis", "urbain"],
+    "text": "Points noirs de circulation à Tunis : Carrefour Mégrine (N°1 des accidents urbains), Avenue Mohammed V (sens unique, piétons nombreux), Passage à niveau El Khadra (fermetures fréquentes), Tunnel du Belvédère (limitation 50 km/h stricte). Préférez le réseau de métro léger (TRANSTU) en heure de pointe."
+  },
+  {
+    "id": "r068", "category": "routes_tunisie", "subcategory": "djerba_gabes",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Guide touristique sécurité routière Sud Tunisie",
+    "tags": ["sud", "tourisme"],
+    "text": "Axe Gabès–Djerba (via la chaussée Rfef) : traversée de la chaussée sur la mer. Risques spécifiques : vent latéral fort (tient sur 7 km), chaussée étroite (1 voie par sens), mauvaise visibilité par temps brumeux. Par vent fort (>50 km/h) : réduisez à 60 km/h, tenez fermement le volant. Alternative : bac depuis Jorf."
+  },
+  {
+    "id": "r069", "category": "combinaison_risques", "subcategory": "fatigue_nuit_pluie",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Analyses multifactorielles",
+    "tags": ["triple_risque"],
+    "text": "La combinaison fatigue + conduite nocturne + pluie multiplie le risque d'accident grave par 8 à 12. Sur les autoroutes tunisiennes, cette combinaison est présente dans plus de 50% des accidents mortels survenant entre 22h et 6h. Si vous vous trouvez dans cette situation : arrêtez-vous à l'aire la plus proche, sans exception."
+  },
+  {
+    "id": "r070", "category": "combinaison_risques", "subcategory": "alcool_vitesse",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Études épidémiologiques accidents routiers",
+    "tags": ["alcool", "vitesse"],
+    "text": "La combinaison alcool + excès de vitesse est responsable de 18% des accidents mortels en Tunisie. L'alcool altère la perception des vitesses (le conducteur perçoit qu'il va moins vite qu'en réalité) et diminue les inhibitions (conduit à accélérer). Cette combinaison est mortelle et passible d'emprisonnement immédiat."
+  },
+  {
+    "id": "r071", "category": "combinaison_risques", "subcategory": "telephone_vitesse",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Études distraction + vitesse",
+    "tags": ["telephone", "vitesse"],
+    "text": "Téléphoner tout en conduisant à 110 km/h (autoroute) revient à conduire pendant 5 secondes avec des réflexes diminués de 50% et la vision tunnel (on ne voit plus les côtés). Si un obstacle surgit à ce moment, la distance de freinage disponible est insuffisante. Cette combinaison cause 8% des accidents autoroutiers en Tunisie."
+  },
+  {
+    "id": "r072", "category": "combinaison_risques", "subcategory": "medicaments_alcool",
+    "severity": "critical", "jurisdiction": "ALL",
+    "source": "Pharmacologie clinique",
+    "tags": ["medicaments", "alcool"],
+    "text": "Combiner alcool et médicaments sédatifs (anxiolytiques, somnifères, antihistaminiques) peut multiplier par 5 l'effet sédatif. Une personne ayant pris 1 comprimé de Lexomil et bu 2 verres peut se retrouver dans un état de somnolence comparable à quelqu'un ayant bu 6 verres. Ne jamais combiner alcool et médicaments avant de conduire."
+  },
+  {
+    "id": "r073", "category": "combinaison_risques", "subcategory": "fatigue_longue_distance",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["fatigue", "longue_distance"],
+    "text": "Sur les grands axes tunisiens (Tunis–Sfax–Gabès), la monotonie de la route plate contribue à la somnolence même chez des conducteurs reposés. Cette fatigue monotonique survient après 1h30 à 2h sur route droite. Elle est particulièrement traître car le conducteur n'a pas l'impression d'être fatigué. Pauses impératives toutes les 2h."
+  },
+  {
+    "id": "r074", "category": "maintenance", "subcategory": "pneus",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 22 + Centres contrôle technique",
+    "tags": ["vehicule", "pluie"],
+    "text": "L'épaisseur légale minimale de sculpture des pneus en Tunisie est de 1.6mm (indicateur d'usure intégré dans le pneu). En dessous de 3mm, la sécurité en pluie est significativement réduite. Vérifiez la pression mensuelle : sous-gonflé = usure prématurée + consommation accrue. Sur-gonflé = perte d'adhérence + risque d'éclatement en été."
+  },
+  {
+    "id": "r075", "category": "maintenance", "subcategory": "freins",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Centres contrôle technique COTUSAL Tunisie",
+    "tags": ["vehicule", "securite"],
+    "text": "Des freins défectueux sont présents dans 15% des véhicules contrôlés en Tunisie. Symptômes à surveiller : bruit de grincement ou de crissement au freinage, pédale de frein qui s'enfonce trop, vibrations au freinage, véhicule qui part d'un côté au freinage. En cas d'un de ces signes, stoppez votre véhicule et faites-le contrôler avant de reprendre la route."
+  },
+  {
+    "id": "r076", "category": "maintenance", "subcategory": "feux",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien",
+    "tags": ["vehicule", "nuit"],
+    "text": "Vérifiez mensuellement le bon fonctionnement de tous vos feux : feux de position, croisement, route, stop, clignotants, feux de recul. En Tunisie, rouler avec un feu stop défectueux de nuit sur les routes non éclairées (A3, GP2) représente un risque d'accident arrière grave. Amende pour défaut d'éclairage : 20 à 80 DT."
+  },
+  {
+    "id": "r077", "category": "maintenance", "subcategory": "controle_technique_tn",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Décret sur le contrôle technique",
+    "tags": ["reglementation", "vehicule"],
+    "text": "En Tunisie, le contrôle technique (visite technique) est obligatoire pour tout véhicule de plus de 3 ans, à renouveler chaque année. Centres agréés : SOTAC, CTAC, COTUSAL répartis dans tous les gouvernorats. Non-renouvellement : amende 30–80 DT + possibilité d'immobilisation du véhicule. La vignette doit être visible sur le pare-brise."
+  },
+  {
+    "id": "r078", "category": "maintenance", "subcategory": "essuie_glaces",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Conseils entretien véhicule",
+    "tags": ["vehicule", "pluie"],
+    "text": "Les essuie-glaces en mauvais état (striures, mauvais contact) réduisent fortement la visibilité sous la pluie. En Tunisie, remplacez-les avant la saison des pluies (octobre). Un jeu de balais d'essuie-glaces coûte entre 25 et 60 DT selon le modèle. Un pare-brise propre et sans éclats améliore significativement la visibilité nocturne."
+  },
+  {
+    "id": "r079", "category": "urgences", "subcategory": "contacts_urgence",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Ministère de l'Intérieur Tunisie — Numéros officiels",
+    "tags": ["urgence", "numeros"],
+    "text": "Numéros d'urgence essentiels en Tunisie : 197 = Police Nationale, 190 = SAMU (urgences médicales), 198 = Protection Civile (pompiers + secours routier), 193 = Garde Nationale (routes nationales), 1021 = Numéro d'urgence universel (fonctionne sans crédit). Autoroute : 71 861 000 (STAP). Ces numéros sont gratuits depuis tout téléphone."
+  },
+  {
+    "id": "r080", "category": "urgences", "subcategory": "accident_procedure",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 95-98 + Formation SAMU",
+    "tags": ["urgence", "accident", "procedure"],
+    "text": "En cas d'accident en Tunisie — ordre d'actions OBLIGATOIRE : 1. Sécurisez la scène (triangle + gilet à 150m). 2. Appelez le 190 (blessés) ou 197 (sans blessés). 3. Ne déplacez pas les blessés sauf danger immédiat (incendie, noyade). 4. Remplissez le constat amiable. 5. Photographiez tout avant de déplacer les véhicules. 6. Prévenez votre assurance dans les 24h."
+  },
+  {
+    "id": "r081", "category": "urgences", "subcategory": "panne_autoroute",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "STAP — Consignes sécurité autoroute",
+    "tags": ["urgence", "panne", "autoroute"],
+    "text": "En cas de panne sur autoroute tunisienne : 1. Allumez les feux de détresse immédiatement. 2. Dégagez le véhicule sur la bande d'arrêt d'urgence (côté droit). 3. Sortez du véhicule par la portière droite. 4. Éloignez-vous du trafic (derrière la glissière si possible). 5. Posez le triangle à 150m. 6. Appelez le 71 861 000 (STAP) ou les bornes SOS oranges toutes les 2 km."
+  },
+  {
+    "id": "r082", "category": "urgences", "subcategory": "constat_amiable",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Fédération Tunisienne des Assurances",
+    "tags": ["accident", "assurance", "procedure"],
+    "text": "Le constat amiable en Tunisie est obligatoire en cas d'accident matériel entre deux véhicules assurés. Il doit être rempli sur place par les deux conducteurs, signé, et transmis à l'assureur dans les 5 jours ouvrables. En cas de désaccord ou de blessés, appelez la police (197) pour établir un procès-verbal officiel."
+  },
+  {
+    "id": "r083", "category": "infractions_penalites", "subcategory": "feu_rouge_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Tableau des sanctions 2024",
+    "tags": ["sanctions", "penalites"],
+    "text": "Griller un feu rouge en Tunisie : amende 40 à 120 DT + retrait 3 points de permis. En cas d'accident causé : responsabilité totale + majoration d'amende + poursuites civiles. L'infraction est constatée par caméra ou agent. Paiement dans les 30 jours : tarif réduit possible. Au-delà : majoration de 50%."
+  },
+  {
+    "id": "r084", "category": "infractions_penalites", "subcategory": "vitesse_paliers_tn",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Barème des amendes vitesse",
+    "tags": ["sanctions", "vitesse"],
+    "text": "Excès de vitesse en Tunisie : 1–20 km/h au-dessus de la limite = 40 DT. 21–40 km/h = 80 DT + possible retrait temporaire du permis. 41–60 km/h = 120 DT + suspension de permis 15 à 90 jours. Plus de 60 km/h au-dessus = 200 DT minimum + suspension immédiate + emprisonnement possible jusqu'à 6 mois."
+  },
+  {
+    "id": "r085", "category": "infractions_penalites", "subcategory": "ceinture_tn",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 88",
+    "tags": ["sanctions", "ceinture"],
+    "text": "Non-port de la ceinture en Tunisie : 20 à 40 DT par personne non attachée dans le véhicule (conducteur + chaque passager). La ceinture est obligatoire sur tous les sièges équipés, y compris les places arrière. Un passager arrière non ceinturé projeté en avant en cas de choc frontal peut tuer le conducteur et passager avant."
+  },
+  {
+    "id": "r086", "category": "infractions_penalites", "subcategory": "assurance_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Code des Assurances Tunisien",
+    "tags": ["sanctions", "assurance"],
+    "text": "Conduire sans assurance RC (responsabilité civile) en Tunisie : amende 100–500 DT + immobilisation du véhicule + suspension du permis possible. L'assurance RC est obligatoire pour tout véhicule circulant. En cas d'accident sans assurance : vous êtes personnellement responsable de TOUS les dommages corporels et matériels, sans plafond."
+  },
+  {
+    "id": "r087", "category": "infractions_penalites", "subcategory": "alcool_tn",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien + Code Pénal Tunisien — Art. 284",
+    "tags": ["sanctions", "alcool"],
+    "text": "Conduite en état d'ivresse en Tunisie (taux > 0.3g/L) : amende 300–1000 DT + suspension immédiate du permis 1 à 6 mois + emprisonnement 15 jours à 1 an (en cas de récidive ou accident). Si l'accident sous alcool cause la mort : emprisonnement jusqu'à 5 ans. Le refus d'éthylomètre est une infraction supplémentaire."
+  },
+  {
+    "id": "r088", "category": "prevention_generale", "subcategory": "checklist_depart",
+    "severity": "low", "jurisdiction": "TN",
+    "source": "Conseils Sécurité Routière Tunisie",
+    "tags": ["prevention", "pratique"],
+    "text": "Avant chaque départ en Tunisie, 60 secondes de vérification suffisent : niveau carburant (calculez pour ne pas tomber en panne, stations parfois rares), pneus (pas à plat visuellement), feux de position allumés si nuit/pluie, téléphone posé, ceinture attachée, GPS programmé avant de démarrer."
+  },
+  {
+    "id": "r089", "category": "prevention_generale", "subcategory": "documents",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 11",
+    "tags": ["reglementation", "documents"],
+    "text": "Documents obligatoires à avoir dans le véhicule en Tunisie : permis de conduire valide, carte grise (certificat d'immatriculation), attestation d'assurance valide (carte verte), vignette de contrôle technique valide. Absence de l'un de ces documents : amende 20–100 DT selon le document manquant."
+  },
+  {
+    "id": "r090", "category": "prevention_generale", "subcategory": "triangle_gilet",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 20",
+    "tags": ["securite", "panne", "accident"],
+    "text": "En Tunisie, le triangle de présignalisation et le gilet fluorescent sont obligatoires dans tout véhicule. En cas d'immobilisation sur voie rapide ou nationale : posez le triangle à 150 mètres à l'arrière, revêtez le gilet avant de sortir du véhicule. Défaut de triangle ou gilet : amende 20–50 DT."
+  },
+  {
+    "id": "r091", "category": "conduite_defensive", "subcategory": "principe_base",
+    "severity": "medium", "jurisdiction": "ALL",
+    "source": "Formation à la conduite défensive",
+    "tags": ["prevention", "pedagogie"],
+    "text": "La conduite défensive consiste à conduire en anticipant les erreurs des autres conducteurs et les dangers potentiels. Principe : supposez que les autres peuvent faire une erreur à tout moment (griller un feu, ne pas céder la priorité, freiner brusquement). Cette attitude réduit de 40% le risque d'être impliqué dans un accident."
+  },
+  {
+    "id": "r092", "category": "conduite_defensive", "subcategory": "anticipation",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["prevention", "pratique"],
+    "text": "En Tunisie, plusieurs comportements exigent une vigilance accrue : piétons traversant hors des clous (pratique courante), motos remontant les files, véhicules démarrant sans clignotant aux feux, camions dépassant dans les virages. Regard loin devant (au moins 5 secondes), vérification régulière des rétroviseurs (toutes les 10 secondes)."
+  },
+  {
+    "id": "r093", "category": "meteo_tunisie", "subcategory": "chehili",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Direction de la Météorologie Nationale Tunisie",
+    "tags": ["ete", "chaleur", "vent"],
+    "text": "Le Chehili (sirocco tunisien, juillet–août) est un vent chaud et sec venant du Sahara qui peut pousser les températures au-delà de 48°C. Effets sur la conduite : pneus surchauffés (risque d'éclatement), mirages sur la chaussée (confusion sur distances), coup de chaleur possible. Réduisez la pression des pneus de 0.2 bar en cas de chaleur extrême."
+  },
+  {
+    "id": "r094", "category": "meteo_tunisie", "subcategory": "vent_fort",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "INM — Institut National de Météorologie Tunisie",
+    "tags": ["vent", "nord"],
+    "text": "Le vent fort (Tramontane, Grec) en Tunisie atteint régulièrement 80–100 km/h en hiver sur le nord (Bizerte, Cap Bon). Effets : déstabilisation des véhicules hauts (SUV, camping-cars, camions), difficulté de maintien de trajectoire sur ponts et viaducs. Réduisez à 70 km/h par vent fort et tenez fermement le volant à deux mains."
+  },
+  {
+    "id": "r095", "category": "meteo_tunisie", "subcategory": "verglas_montagne",
+    "severity": "critical", "jurisdiction": "TN",
+    "source": "Protection Civile Tunisie — Bulletins hivernaux",
+    "tags": ["hiver", "montagne", "verglas"],
+    "text": "Le verglas sur les routes tunisiennes de montagne (Ain Draham, Le Kef, Kasserine, Siliana) survient de décembre à février lorsque les températures descendent sous 0°C. Il est souvent imperceptible (verglas noir). Ces routes ne sont généralement pas salées. En hiver sur les cols : pneus hiver ou chaînes obligatoires, vitesse maximale 40 km/h."
+  },
+  {
+    "id": "r096", "category": "meteo_tunisie", "subcategory": "sable",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie — Régions du Sud",
+    "tags": ["sud", "desert"],
+    "text": "Les tempêtes de sable (Ghibli) dans le Sud tunisien (Tozeur, Kebili, Tataouine) peuvent réduire la visibilité à moins de 10 mètres. Conduite à adopter : arrêtez-vous sur le bas-côté, allumez les feux de détresse, ne conduisez pas dans une tempête de sable. Le sable dépose une fine couche sur la route rendant la chaussée glissante même après la tempête."
+  },
+  {
+    "id": "r097", "category": "infractions_penalites", "subcategory": "depassement",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "Code de la Route Tunisien — Art. 38-45",
+    "tags": ["sanctions", "depassement"],
+    "text": "Dépassement dangereux en Tunisie (sur ligne continue, dans virage, en sommet de côte) : amende 40–120 DT + retrait de 3 points. Cause principale des accidents frontaux sur les routes nationales tunisiennes. Règle d'or : ne dépassez que si vous voyez clairement sur au moins 400 mètres et si la voie d'en face est libre et dégagée."
+  },
+  {
+    "id": "r098", "category": "infractions_penalites", "subcategory": "stationnement_tn",
+    "severity": "low", "jurisdiction": "TN",
+    "source": "Règlement municipal Tunisie",
+    "tags": ["sanctions", "stationnement"],
+    "text": "Stationnement interdit en Tunisie : amende 20–80 DT + sabot (immobilisation de roue) ou mise en fourrière. Frais de fourrière : 30–80 DT de base + 10 DT par jour supplémentaire. Zones interdites : double file, sur trottoir bloquant passage, en face d'une sortie de garage, sur passage piéton, zone rouge (marquage au sol)."
+  },
+  {
+    "id": "r099", "category": "jeunes_conducteurs", "subcategory": "statistiques",
+    "severity": "high", "jurisdiction": "TN",
+    "source": "ONISR Tunisie — Profil des accidentés 2023",
+    "tags": ["jeunes", "statistiques"],
+    "text": "En Tunisie, les conducteurs de 18 à 25 ans représentent 35% des tués sur la route tout en ne représentant que 15% des conducteurs. Facteurs explicatifs : manque d'expérience de la perception des risques, tendance à la prise de risque, conduite nocturne plus fréquente, sensibilité à la pression sociale (passagers qui encouragent la vitesse)."
+  },
+  {
+    "id": "r100", "category": "jeunes_conducteurs", "subcategory": "conseils",
+    "severity": "medium", "jurisdiction": "TN",
+    "source": "Sécurité Routière Tunisie",
+    "tags": ["jeunes", "prevention"],
+    "text": "Conseils spécifiques pour les jeunes conducteurs tunisiens : Évitez de conduire avec plusieurs passagers jeunes (pression sociale). Ne conduisez pas la nuit les 6 premiers mois. Zéro alcool (votre cerveau est encore en développement jusqu'à 25 ans). Si vous sentez que vous prenez trop de risques, rangez-vous et reprenez vos esprits."
+  }
+]

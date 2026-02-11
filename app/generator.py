@@ -1,103 +1,136 @@
 """
 generator.py
 ------------
-LLM module: takes the analyzed situation + risk score + retrieved rules
-and generates a clear, personalized safety advice in French.
+Single LLM call that does BOTH intent classification AND advice generation.
+Eliminates the previous double-call latency (~50% faster).
 
-Supports: OpenAI API, Mistral API, or local Ollama (free)
+Supported backends: openai | mistral | ollama (default, free local)
+
+Setup Ollama:
+  brew install ollama          (macOS) / or https://ollama.ai
+  ollama pull mistral
+  ollama serve
 """
 
 import os
 import json
-from typing import Literal
 
-
-# ─────────────────────────────────────────────
-#  BACKEND SELECTION
-#  Set LLM_BACKEND in your environment:
-#    export LLM_BACKEND=openai    (needs API key)
-#    export LLM_BACKEND=mistral   (needs API key)
-#    export LLM_BACKEND=ollama    (free, local)
-# ─────────────────────────────────────────────
-
-LLM_BACKEND = os.getenv("LLM_BACKEND", "ollama")   # default = free local
-
+LLM_BACKEND = os.getenv("LLM_BACKEND", "ollama")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
 
 # ─────────────────────────────────────────────
 #  SYSTEM PROMPT
 # ─────────────────────────────────────────────
 
-SYSTEM_PROMPT = """Tu es un assistant expert en sécurité routière, bienveillant mais direct.
-Ton rôle est d'aider les conducteurs à comprendre les risques et à prendre les bonnes décisions.
+SYSTEM_PROMPT = """Tu es un assistant expert en sécurité routière tunisienne.
+Tu connais parfaitement le Code de la Route Tunisien, les sanctions légales, les routes spécifiques à la Tunisie et les numéros d'urgence tunisiens.
 
-Règles de réponse:
-- Toujours répondre en français
-- Être direct et concret, jamais vague
-- Utiliser des faits chiffrés quand disponibles
-- Éviter le jargon technique
-- Ton ton est celui d'un ami expert, pas d'un robot
-- Ne jamais minimiser un risque réel"""
+RÈGLES ABSOLUES :
+- Réponds TOUJOURS en français
+- Sois direct, concret, jamais vague
+- Utilise des chiffres réels (amendes en DT, vitesses en km/h, numéros d'urgence tunisiens)
+- Ton ton : ami expert bienveillant mais ferme face au danger
+- Ne minimise JAMAIS un risque réel
+- Ne confonds JAMAIS les lois françaises et tunisiennes (ex: taux alcool TN = 0.3g/L, pas 0.5g/L)
+- Réponds UNIQUEMENT avec du JSON valide, sans texte avant ou après"""
 
 
 # ─────────────────────────────────────────────
-#  PROMPT BUILDER
+#  UNIFIED PROMPT (intent + advice in one shot)
 # ─────────────────────────────────────────────
 
-def build_prompt(situation: str, risk: dict, context_rules: str) -> str:
-    """Build the full prompt to send to the LLM."""
+def build_unified_prompt(user_input: str, fast_scan: dict, context_rules: str) -> str:
+    """
+    Build a single prompt that asks the LLM to:
+    1. Classify the intent
+    2. Generate the appropriate advice
+    All in one JSON response.
+    """
+    factors_hint    = ", ".join(fast_scan.get("factors", [])) or "aucun détecté"
+    infractions_hint= ", ".join(fast_scan.get("infractions", [])) or "aucune détectée"
+    emergencies_hint= ", ".join(fast_scan.get("emergencies", [])) or "aucune"
+    speed_hint      = fast_scan.get("speed_value")
+    hours_hint      = fast_scan.get("hours_driven")
 
-    factors_str = ", ".join(risk["factors"]) if risk["factors"] else "aucun facteur majeur"
-    actions_hint = "\n".join([f"- {a}" for a in risk["actions"][:3]])
-    warnings_str = " | ".join(risk["warnings"]) if risk["warnings"] else ""
+    return f"""ENTRÉE CONDUCTEUR :
+"{user_input}"
 
-    prompt = f"""SITUATION DU CONDUCTEUR:
-"{situation}"
+PRÉ-ANALYSE (aide-toi en mais reste libre de corriger) :
+- Facteurs de risque détectés : {factors_hint}
+- Infractions détectées : {infractions_hint}
+- Urgences détectées : {emergencies_hint}
+- Vitesse détectée : {speed_hint or "non détectée"} km/h
+- Heures de conduite détectées : {hours_hint or "non détectées"}
 
-ANALYSE DE RISQUE:
-- Facteurs détectés: {factors_str}
-- Niveau de danger: {risk['emoji']} {risk['level']} (score: {risk['score']}/12)
-- Avertissements spéciaux: {warnings_str if warnings_str else "aucun"}
+RÈGLES PERTINENTES (utilise-les pour fonder tes conseils) :
+{context_rules if context_rules else "Aucune règle récupérée — utilise tes connaissances."}
 
-RÈGLES DE SÉCURITÉ PERTINENTES:
-{context_rules}
+────────────────────────────────────────────────
+Ta tâche : analyse la situation ET génère la réponse appropriée.
 
-ACTIONS SUGGÉRÉES (à reformuler naturellement):
-{actions_hint}
+ÉTAPE 1 — CLASSIFICATION DE L'INTENTION :
+Choisis l'une des intentions suivantes (une seule) :
+  • "dangerous_situation" → situation dangereuse en cours ou passée (fatigue, pluie, vitesse…)
+  • "infraction_question" → demande d'info sur une infraction hypothétique ("c'est quoi l'amende si…")
+  • "infraction_committed" → infraction VRAIMENT commise ("j'ai grillé", "j'ai été flashé")
+  • "emergency"           → accident réel, blessé, panne grave, incendie
+  • "minor_damage"        → dégât matériel mineur (rayure, accroc, bosse)
+  • "prevention"          → demande de conseil préventif ("comment éviter…", "conseils pour…")
 
----
-Génère une réponse structurée avec EXACTEMENT ce format JSON:
+ÉTAPE 2 — RÉPONSE ADAPTÉE :
+Selon l'intention, génère une réponse JSON avec EXACTEMENT cette structure :
 
 {{
-  "explication": "1-2 phrases expliquant POURQUOI cette situation est dangereuse. Cite un chiffre si possible.",
+  "intent": "...",
+  "is_real_event": true/false,
+  "risk_factors": ["liste des facteurs réels identifiés"],
+  "infractions": ["liste des infractions identifiées"],
+  "urgency_level": 0,
+  "explication": "1-2 phrases expliquant le POURQUOI du danger ou de la situation. Cite un chiffre tunisien si possible.",
   "conseils": [
-    "Conseil 1 concret et actionnable",
-    "Conseil 2 concret et actionnable",
-    "Conseil 3 concret et actionnable"
+    "Conseil 1 — concret et actionnable, adapté à la Tunisie",
+    "Conseil 2 — concret et actionnable",
+    "Conseil 3 — concret et actionnable"
   ],
-  "message": "Une phrase courte d'encouragement ou d'avertissement fort selon le niveau de risque.",
-  "urgence": "{risk['level']}"
+  "message": "Une phrase courte, percutante — avertissement ou encouragement selon la gravité.",
+  "urgence_label": "FAIBLE|MODÉRÉ|ÉLEVÉ|CRITIQUE|EXTRÊME"
 }}
 
-Réponds UNIQUEMENT avec le JSON, sans texte avant ou après."""
-
-    return prompt
+Pour "urgency_level" : 0=info, 1=prévention, 2=vigilance, 3=action sous 24h, 4=action rapide, 5=urgence immédiate
+RÉPONDS UNIQUEMENT AVEC LE JSON — aucun texte avant ou après."""
 
 
 # ─────────────────────────────────────────────
-#  LLM BACKENDS
+#  BACKEND CALLERS
 # ─────────────────────────────────────────────
+
+def _call_ollama(prompt: str) -> str:
+    import requests
+    resp = requests.post(
+        "http://localhost:11434/api/generate",
+        json={
+            "model":  OLLAMA_MODEL,
+            "prompt": f"{SYSTEM_PROMPT}\n\n{prompt}",
+            "stream": False,
+            "options": {"temperature": 0.3},
+        },
+        timeout=90,
+    )
+    resp.raise_for_status()
+    return resp.json()["response"]
+
 
 def _call_openai(prompt: str) -> str:
     from openai import OpenAI
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    client   = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     response = client.chat.completions.create(
-        model="gpt-4o-mini",     # cheap and fast
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user",   "content": prompt}
+            {"role": "user",   "content": prompt},
         ],
-        temperature=0.4,
-        max_tokens=500,
+        temperature=0.3,
+        max_tokens=700,
     )
     return response.choices[0].message.content
 
@@ -105,91 +138,133 @@ def _call_openai(prompt: str) -> str:
 def _call_mistral(prompt: str) -> str:
     from mistralai.client import MistralClient
     from mistralai.models.chat_completion import ChatMessage
-    client = MistralClient(api_key=os.getenv("MISTRAL_API_KEY"))
+    client   = MistralClient(api_key=os.getenv("MISTRAL_API_KEY"))
     response = client.chat(
         model="mistral-small-latest",
         messages=[
             ChatMessage(role="system", content=SYSTEM_PROMPT),
             ChatMessage(role="user",   content=prompt),
         ],
-        temperature=0.4,
-        max_tokens=500,
+        temperature=0.3,
+        max_tokens=700,
     )
     return response.choices[0].message.content
 
 
-def _call_ollama(prompt: str, model: str = "mistral") -> str:
-    """
-    Use local Ollama (free, no API key needed).
-    Install: https://ollama.ai
-    Run:     ollama pull mistral
-    """
-    import requests
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": model,
-            "prompt": f"{SYSTEM_PROMPT}\n\n{prompt}",
-            "stream": False,
-            "options": {"temperature": 0.4}
-        },
-        timeout=60,
-    )
-    return response.json()["response"]
+# ─────────────────────────────────────────────
+#  JSON PARSER WITH FALLBACK
+# ─────────────────────────────────────────────
 
-
-def _parse_llm_response(raw: str) -> dict:
-    """Parse the JSON response from the LLM, with fallback."""
+def _parse(raw: str, user_input: str) -> dict:
     raw = raw.strip()
+    # Strip markdown fences
+    if "```json" in raw:
+        raw = raw.split("```json")[1].split("```")[0]
+    elif raw.startswith("```"):
+        raw = raw.split("```")[1].split("```")[0]
 
-    # Remove markdown code blocks if present
-    if raw.startswith("```"):
-        raw = raw.split("```")[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-
+    # First attempt: direct parse
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
-        # Fallback: return structured error response
-        return {
-            "explication": "Situation à risque détectée. Veuillez être prudent.",
-            "conseils": [
-                "Réduisez votre vitesse",
-                "Augmentez la distance de sécurité",
-                "Arrêtez-vous si vous vous sentez en danger",
-            ],
-            "message": "Votre sécurité est la priorité.",
-            "urgence": "MODÉRÉ",
-        }
+        pass
+
+    # Second attempt: find first {...} block
+    import re
+    m = re.search(r"\{.*\}", raw, re.DOTALL)
+    if m:
+        try:
+            return json.loads(m.group())
+        except json.JSONDecodeError:
+            pass
+
+    # Hard fallback
+    print(f"⚠️  JSON parse failed. Raw:\n{raw[:300]}")
+    return {
+        "intent":        "dangerous_situation",
+        "is_real_event": True,
+        "risk_factors":  [],
+        "infractions":   [],
+        "urgency_level": 2,
+        "explication":   "Situation à risque détectée. Soyez prudent.",
+        "conseils": [
+            "Réduisez votre vitesse",
+            "Augmentez la distance de sécurité",
+            "Arrêtez-vous si vous ne vous sentez pas en sécurité",
+        ],
+        "message":       "Votre sécurité est la priorité absolue.",
+        "urgence_label": "MODÉRÉ",
+    }
 
 
 # ─────────────────────────────────────────────
-#  MAIN GENERATOR FUNCTION
+#  ADVICE GENERATION FOR PENALTY CONTEXT
+#  (used when infraction handler needs LLM to format a legal response)
 # ─────────────────────────────────────────────
 
-def generate_advice(
-    situation: str,
-    risk: dict,
+def generate_penalty_advice(
+    user_input:    str,
     context_rules: str,
-    backend: str = None
+    backend:       str = None,
 ) -> dict:
     """
-    Generate personalized safety advice using an LLM.
-
-    Args:
-        situation:     original user input
-        risk:          result from scorer.compute_risk()
-        context_rules: formatted string from retriever.format_context()
-        backend:       'openai', 'mistral', or 'ollama' (overrides env var)
-
-    Returns:
-        dict with keys: explication, conseils (list), message, urgence
+    Lightweight LLM call specifically for infraction/penalty responses.
+    Returns dict with explication, conseils, message.
     """
     backend = backend or LLM_BACKEND
-    prompt  = build_prompt(situation, risk, context_rules)
+    prompt  = f"""L'utilisateur a une question ou une situation liée à une infraction routière en Tunisie.
 
-    print(f"🤖 Calling LLM backend: {backend}")
+ENTRÉE : "{user_input}"
+
+CONTEXTE LÉGAL TUNISIEN :
+{context_rules}
+
+Réponds en JSON avec exactement ces 3 clés :
+{{
+  "explication": "Explication claire et factuelle de la situation légale en Tunisie",
+  "conseils": ["Conseil 1", "Conseil 2", "Conseil 3"],
+  "message": "Message final court et percutant"
+}}
+
+RAPPELS : Montants en DT, taux alcool tunisien = 0.3g/L, permis retrait = droit tunisien.
+RÉPONDS UNIQUEMENT AVEC LE JSON."""
+
+    if backend == "openai":
+        raw = _call_openai(prompt)
+    elif backend == "mistral":
+        raw = _call_mistral(prompt)
+    else:
+        raw = _call_ollama(prompt)
+
+    return _parse(raw, user_input)
+
+
+# ─────────────────────────────────────────────
+#  MAIN ENTRY POINT
+# ─────────────────────────────────────────────
+
+def generate_unified(
+    user_input:    str,
+    fast_scan:     dict,
+    context_rules: str,
+    backend:       str = None,
+) -> dict:
+    """
+    Single LLM call: classify intent + generate advice.
+
+    Args:
+        user_input:    raw user text
+        fast_scan:     result from extractor.fast_keyword_scan()
+        context_rules: formatted rules from retriever.format_context()
+        backend:       'openai' | 'mistral' | 'ollama'
+
+    Returns:
+        Full analysis dict including intent, risk_factors, conseils, etc.
+    """
+    backend = backend or LLM_BACKEND
+    prompt  = build_unified_prompt(user_input, fast_scan, context_rules)
+
+    print(f"🤖 LLM call [{backend}] …")
 
     if backend == "openai":
         raw = _call_openai(prompt)
@@ -198,53 +273,8 @@ def generate_advice(
     elif backend == "ollama":
         raw = _call_ollama(prompt)
     else:
-        raise ValueError(f"Unknown backend: {backend}. Use 'openai', 'mistral', or 'ollama'.")
+        raise ValueError(f"Unknown backend: {backend}")
 
-    return _parse_llm_response(raw)
-
-
-# ─────────────────────────────────────────────
-#  QUICK TEST  (run: python generator.py)
-# ─────────────────────────────────────────────
-
-if __name__ == "__main__":
-    # Simulate a full pipeline result
-    mock_risk = {
-        "score":    8,
-        "level":    "CRITIQUE",
-        "emoji":    "🔴",
-        "factors":  ["fatigue", "nuit", "pluie"],
-        "warnings": ["Fatigue + nuit = combo très dangereux", "Triple risque critique"],
-        "actions":  [
-            "Arrêtez-vous à la prochaine aire de repos",
-            "Faites une sieste de 20 minutes",
-            "Réduisez votre vitesse de 20 km/h",
-        ],
-    }
-
-    mock_context = """[Règle 1 — Sécurité Routière]
-La somnolence au volant est responsable de 1 accident mortel sur 3 sur autoroute.
-
-[Règle 2 — Code de la Route]
-Par temps de pluie, la distance de freinage est multipliée par 2.
-
-[Règle 3 — Études scientifiques]
-La combinaison fatigue + nuit + pluie multiplie le risque d'accident par 8."""
-
-    situation = "Je conduis depuis 5 heures, il est 23h et il pleut fort."
-
-    print("=" * 60)
-    print("GENERATOR TEST")
-    print("=" * 60)
-    print(f"Situation: {situation}")
-    print(f"Backend: {LLM_BACKEND}")
-    print()
-
-    result = generate_advice(situation, mock_risk, mock_context)
-
-    print("📋 RESULT:")
-    print(f"⚠️  Explication: {result['explication']}")
-    print(f"✅ Conseils:")
-    for i, c in enumerate(result['conseils'], 1):
-        print(f"   {i}. {c}")
-    print(f"💬 Message: {result['message']}")
+    result = _parse(raw, user_input)
+    result["raw_input"] = user_input
+    return result
