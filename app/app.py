@@ -34,7 +34,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-#  CSS — Dark automotive dashboard
+#  CSS — Light grey Apple-style theme
 # ─────────────────────────────────────────────
 
 st.markdown("""
@@ -44,20 +44,20 @@ st.markdown("""
 
 /* ── Root theme ── */
 :root {
-    --bg-deep:    #07080d;
-    --bg-panel:   #0e1018;
-    --bg-card:    #141720;
-    --bg-input:   #1a1f2e;
-    --border:     #252b3b;
+    --bg-deep:    #f5f5f7;
+    --bg-panel:   #ffffff;
+    --bg-card:    #fafafa;
+    --bg-input:   #f0f0f2;
+    --border:     #d1d1d6;
     --amber:      #f59e0b;
-    --amber-dim:  #92610a;
+    --amber-dim:  #b87109;
     --red:        #ef4444;
     --orange:     #f97316;
     --green:      #22c55e;
     --blue:       #3b82f6;
-    --text-primary:   #e8eaf0;
-    --text-secondary: #8891a8;
-    --text-muted:     #4a5168;
+    --text-primary:   #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-muted:     #86868b;
 }
 
 /* ── Global ── */
@@ -80,6 +80,7 @@ html, body, .stApp {
 [data-testid="stSidebar"] {
     background: var(--bg-panel) !important;
     border-right: 1px solid var(--border);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 [data-testid="stSidebar"] .block-container { padding: 1.5rem 1rem !important; }
 
@@ -119,21 +120,27 @@ textarea, .stTextArea textarea {
     resize: none !important;
     transition: border-color 0.2s;
 }
-textarea:focus { border-color: var(--amber) !important; outline: none !important; }
+textarea:focus { 
+    border-color: var(--amber) !important; 
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
 
 /* ── Buttons ── */
 .stButton > button {
-    background: var(--bg-input) !important;
+    background: var(--bg-panel) !important;
     border: 1px solid var(--border) !important;
     color: var(--text-primary) !important;
     border-radius: 10px !important;
     font-family: 'DM Sans', sans-serif !important;
     font-weight: 500 !important;
     transition: all 0.2s !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 .stButton > button:hover {
     border-color: var(--amber) !important;
     color: var(--amber) !important;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2);
 }
 
 /* ── Spinner ── */
@@ -180,16 +187,16 @@ with st.sidebar:
     st.markdown("""
     <div style="text-align:center; padding: 0.5rem 0 1.5rem;">
         <div style="font-family:'Space Mono',monospace; font-size:1.6rem; color:#f59e0b; letter-spacing:0.04em;">
-            🚗 ROAD<br><span style="color:#e8eaf0;">SAFETY</span>
+            🚗 ROAD<br><span style="color:#1d1d1f;">SAFETY</span>
         </div>
-        <div style="font-size:0.7rem; color:#4a5168; letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;">
+        <div style="font-size:0.7rem; color:#86868b; letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;">
             Tunisie · AI Assistant
         </div>
     </div>
     <hr>
     """, unsafe_allow_html=True)
 
-    st.markdown('<p style="color:#8891a8;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Modèle LLM</p>', unsafe_allow_html=True)
+    st.markdown('<p style="color:#6e6e73;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Modèle LLM</p>', unsafe_allow_html=True)
     backend = st.selectbox(
         label="LLM Backend",
         options=["ollama", "openai", "mistral"],
@@ -199,7 +206,7 @@ with st.sidebar:
 
     st.markdown('<hr>', unsafe_allow_html=True)
 
-    st.markdown('<p style="color:#8891a8;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Langue de reconnaissance vocale</p>', unsafe_allow_html=True)
+    st.markdown('<p style="color:#6e6e73;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Langue de reconnaissance vocale</p>', unsafe_allow_html=True)
     stt_lang = st.selectbox(
         label="Langue STT",
         options=[("Français", "fr"), ("Arabe (Tunisien)", "ar"), ("Anglais", "en")],
@@ -210,7 +217,7 @@ with st.sidebar:
 
     st.markdown('<hr>', unsafe_allow_html=True)
 
-    st.markdown('<p style="color:#8891a8;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Taille modèle Whisper</p>', unsafe_allow_html=True)
+    st.markdown('<p style="color:#6e6e73;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Taille modèle Whisper</p>', unsafe_allow_html=True)
     whisper_size = st.selectbox(
         label="Whisper size",
         options=[("Tiny — rapide", "tiny"), ("Base — équilibré ✓", "base"), ("Small — précis", "small")],
@@ -229,14 +236,14 @@ with st.sidebar:
 
     # Emergency numbers quick ref
     st.markdown("""
-    <div style="background:#0e1018; border:1px solid #252b3b; border-radius:10px; padding:1rem;">
+    <div style="background:#fafafa; border:1px solid #d1d1d6; border-radius:10px; padding:1rem;">
         <p style="color:#f59e0b; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; margin:0 0 0.75rem;">Urgences Tunisie</p>
-        <div style="font-size:0.8rem; color:#8891a8; line-height:2;">
-            📞 <b style="color:#e8eaf0;">197</b> Police<br>
-            📞 <b style="color:#e8eaf0;">190</b> SAMU<br>
-            📞 <b style="color:#e8eaf0;">198</b> Protection Civile<br>
-            📞 <b style="color:#e8eaf0;">193</b> Garde Nationale<br>
-            📞 <b style="color:#e8eaf0;">1021</b> Urgence universelle
+        <div style="font-size:0.8rem; color:#6e6e73; line-height:2;">
+            📞 <b style="color:#1d1d1f;">197</b> Police<br>
+            📞 <b style="color:#1d1d1f;">190</b> SAMU<br>
+            📞 <b style="color:#1d1d1f;">198</b> Protection Civile<br>
+            📞 <b style="color:#1d1d1f;">193</b> Garde Nationale<br>
+            📞 <b style="color:#1d1d1f;">1021</b> Urgence universelle
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -258,29 +265,30 @@ st.markdown("""
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 0 1rem;
-    border-bottom: 1px solid #252b3b;
+    border-bottom: 1px solid #d1d1d6;
     margin-bottom: 1.5rem;
 ">
     <div>
         <h1 style="
             font-family: 'Space Mono', monospace;
             font-size: 1.3rem;
-            color: #e8eaf0;
+            color: #1d1d1f;
             margin: 0;
             letter-spacing: 0.04em;
         ">Assistant Sécurité Routière</h1>
-        <p style="color:#4a5168; font-size:0.8rem; margin: 4px 0 0; letter-spacing:0.05em;">
+        <p style="color:#86868b; font-size:0.8rem; margin: 4px 0 0; letter-spacing:0.05em;">
             Conseils · Infractions · Urgences · Réparations · Tunisie
         </p>
     </div>
     <div style="
-        background: #0e1018;
-        border: 1px solid #252b3b;
+        background: #f0fdf4;
+        border: 1px solid #22c55e;
         border-radius: 20px;
         padding: 0.4rem 1rem;
         font-size: 0.75rem;
-        color: #22c55e;
+        color: #15803d;
         letter-spacing: 0.05em;
+        font-weight: 500;
     ">● EN LIGNE</div>
 </div>
 """, unsafe_allow_html=True)
@@ -291,11 +299,11 @@ st.markdown("""
 # ─────────────────────────────────────────────
 
 LEVEL_STYLES = {
-    "FAIBLE":   {"bg": "#052010", "border": "#22c55e", "color": "#22c55e"},
-    "MODÉRÉ":  {"bg": "#1a1400", "border": "#eab308", "color": "#eab308"},
-    "ÉLEVÉ":   {"bg": "#1a0e00", "border": "#f97316", "color": "#f97316"},
-    "CRITIQUE": {"bg": "#1a0505", "border": "#ef4444", "color": "#ef4444"},
-    "EXTRÊME":  {"bg": "#0f0005", "border": "#7f1d1d", "color": "#ff4466"},
+    "FAIBLE":   {"bg": "#f0fdf4", "border": "#22c55e", "color": "#15803d"},
+    "MODÉRÉ":  {"bg": "#fffbeb", "border": "#eab308", "color": "#a16207"},
+    "ÉLEVÉ":   {"bg": "#fff7ed", "border": "#f97316", "color": "#c2410c"},
+    "CRITIQUE": {"bg": "#fef2f2", "border": "#ef4444", "color": "#b91c1c"},
+    "EXTRÊME":  {"bg": "#fef2f2", "border": "#991b1b", "color": "#7f1d1d"},
 }
 
 TYPE_ICONS = {
@@ -393,9 +401,9 @@ def render_result(result: dict):
             cols = st.columns(3)
             with cols[0]:
                 st.markdown(f"""
-                <div style="background:#1a1400; border:1px solid #eab30840;
+                <div style="background:#fffbeb; border:1px solid #eab30840;
                     border-radius:8px; padding:0.6rem 1rem; text-align:center;">
-                    <div style="font-size:0.65rem; color:#8891a8; letter-spacing:0.1em;
+                    <div style="font-size:0.65rem; color:#6e6e73; letter-spacing:0.1em;
                                 text-transform:uppercase;">Amende</div>
                     <div style="font-size:1.1rem; color:#eab308; font-family:'Space Mono',monospace;">
                         {a_min}–{a_max} DT</div>
@@ -404,9 +412,9 @@ def render_result(result: dict):
             with cols[1]:
                 if result.get("permis_risque"):
                     st.markdown("""
-                    <div style="background:#1a0e00; border:1px solid #f9731640;
+                    <div style="background:#fff7ed; border:1px solid #f9731640;
                         border-radius:8px; padding:0.6rem 1rem; text-align:center;">
-                        <div style="font-size:0.65rem; color:#8891a8; letter-spacing:0.1em;
+                        <div style="font-size:0.65rem; color:#6e6e73; letter-spacing:0.1em;
                                     text-transform:uppercase;">Permis</div>
                         <div style="font-size:0.9rem; color:#f97316;">⚠️ Retrait possible</div>
                     </div>
@@ -414,9 +422,9 @@ def render_result(result: dict):
             with cols[2]:
                 if result.get("prison_risque"):
                     st.markdown("""
-                    <div style="background:#1a0505; border:1px solid #ef444440;
+                    <div style="background:#fef2f2; border:1px solid #ef444440;
                         border-radius:8px; padding:0.6rem 1rem; text-align:center;">
-                        <div style="font-size:0.65rem; color:#8891a8; letter-spacing:0.1em;
+                        <div style="font-size:0.65rem; color:#6e6e73; letter-spacing:0.1em;
                                     text-transform:uppercase;">Pénal</div>
                         <div style="font-size:0.9rem; color:#ef4444;">⛔ Prison possible</div>
                     </div>
@@ -436,7 +444,7 @@ def render_result(result: dict):
     explication = result.get("explication", "")
     if explication:
         st.markdown(f"""
-        <p style="color:#c8cad6; font-size:0.9rem; line-height:1.7;
+        <p style="color:#1d1d1f; font-size:0.9rem; line-height:1.7;
                   margin: 0.75rem 0 0.5rem;">{explication}</p>
         """, unsafe_allow_html=True)
 
@@ -444,7 +452,7 @@ def render_result(result: dict):
     conseils = result.get("conseils", [])
     if conseils:
         st.markdown("""
-        <p style="color:#8891a8; font-size:0.7rem; letter-spacing:0.1em;
+        <p style="color:#6e6e73; font-size:0.7rem; letter-spacing:0.1em;
                   text-transform:uppercase; margin: 0.75rem 0 0.4rem;">Conseils</p>
         """, unsafe_allow_html=True)
         for c in conseils[:5]:
@@ -452,7 +460,7 @@ def render_result(result: dict):
             <div style="display:flex; gap:0.6rem; align-items:flex-start;
                         margin-bottom:0.4rem;">
                 <div style="color:{style['color']}; flex-shrink:0; margin-top:2px;">→</div>
-                <div style="color:#c8cad6; font-size:0.88rem; line-height:1.6;">{c}</div>
+                <div style="color:#1d1d1f; font-size:0.88rem; line-height:1.6;">{c}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -485,13 +493,13 @@ def render_chat():
         <div style="
             text-align: center;
             padding: 4rem 2rem;
-            color: #4a5168;
+            color: #86868b;
         ">
             <div style="font-size:3rem; margin-bottom:1rem;">🚗</div>
-            <h2 style="color:#8891a8; font-size:1.1rem; font-weight:400; margin-bottom:0.75rem;">
+            <h2 style="color:#6e6e73; font-size:1.1rem; font-weight:400; margin-bottom:0.75rem;">
                 Comment puis-je vous aider aujourd'hui ?
             </h2>
-            <p style="font-size:0.85rem; max-width:500px; margin:0 auto; line-height:1.8; color:#3a4158;">
+            <p style="font-size:0.85rem; max-width:500px; margin:0 auto; line-height:1.8; color:#86868b;">
                 Décrivez votre situation en texte ou utilisez votre microphone.<br>
                 Je comprends les situations de danger, les infractions, les urgences et les petits dégâts.
             </p>
@@ -499,20 +507,20 @@ def render_chat():
                 display:flex; flex-wrap:wrap; gap:0.5rem;
                 justify-content:center; margin-top:2rem;
             ">
-                <span style="background:#141720; border:1px solid #252b3b; border-radius:20px;
-                             padding:0.4rem 1rem; font-size:0.78rem; color:#8891a8;">
+                <span style="background:#fafafa; border:1px solid #d1d1d6; border-radius:20px;
+                             padding:0.4rem 1rem; font-size:0.78rem; color:#6e6e73;">
                     ⚠️ Je me sens fatigué...
                 </span>
-                <span style="background:#141720; border:1px solid #252b3b; border-radius:20px;
-                             padding:0.4rem 1rem; font-size:0.78rem; color:#8891a8;">
+                <span style="background:#fafafa; border:1px solid #d1d1d6; border-radius:20px;
+                             padding:0.4rem 1rem; font-size:0.78rem; color:#6e6e73;">
                     🚨 J'ai grillé un feu rouge
                 </span>
-                <span style="background:#141720; border:1px solid #252b3b; border-radius:20px;
-                             padding:0.4rem 1rem; font-size:0.78rem; color:#8891a8;">
+                <span style="background:#fafafa; border:1px solid #d1d1d6; border-radius:20px;
+                             padding:0.4rem 1rem; font-size:0.78rem; color:#6e6e73;">
                     🆘 Accident sur la route
                 </span>
-                <span style="background:#141720; border:1px solid #252b3b; border-radius:20px;
-                             padding:0.4rem 1rem; font-size:0.78rem; color:#8891a8;">
+                <span style="background:#fafafa; border:1px solid #d1d1d6; border-radius:20px;
+                             padding:0.4rem 1rem; font-size:0.78rem; color:#6e6e73;">
                     💰 Amende vitesse Tunisie ?
                 </span>
             </div>
@@ -530,13 +538,13 @@ def render_chat():
                 display:flex; justify-content:flex-end; margin-bottom:1rem;
             ">
                 <div style="
-                    background:#1a1f2e;
-                    border:1px solid #252b3b;
+                    background:#ffffff;
+                    border:1px solid #d1d1d6;
                     border-radius:14px 14px 2px 14px;
                     padding:0.75rem 1.1rem;
                     max-width:75%;
                     font-size:0.9rem;
-                    color:#c8cad6;
+                    color:#1d1d1f;
                     line-height:1.6;
                 ">
                     <span style="font-size:0.7rem; color:#4a5168; margin-right:0.4rem;">{mode_icon}</span>
@@ -552,10 +560,10 @@ def render_chat():
             else:
                 st.markdown(f"""
                 <div style="
-                    background:#141720; border:1px solid #252b3b;
+                    background:#fafafa; border:1px solid #d1d1d6;
                     border-radius:14px 14px 14px 2px;
                     padding:0.75rem 1.1rem; max-width:75%;
-                    font-size:0.9rem; color:#c8cad6;
+                    font-size:0.9rem; color:#1d1d1f;
                     margin-bottom:1rem;
                 ">{msg['content']}</div>
                 """, unsafe_allow_html=True)
@@ -679,11 +687,11 @@ else:
 
         st.markdown("""
         <div style="
-            background:#0e1018; border:1px solid #252b3b;
+            background:#fafafa; border:1px solid #d1d1d6;
             border-radius:12px; padding:1.25rem 1.5rem;
             margin-bottom:0.75rem;
         ">
-            <p style="color:#8891a8; font-size:0.8rem; margin:0 0 0.5rem;
+            <p style="color:#6e6e73; font-size:0.8rem; margin:0 0 0.5rem;
                       letter-spacing:0.05em;">
                 🎙️  Appuyez sur le bouton pour parler. L'envoi est automatique à la fin.
             </p>
@@ -718,11 +726,11 @@ else:
                 if transcribed:
                     st.markdown(f"""
                     <div style="
-                        background:#141720; border:1px solid #22c55e40;
+                        background:#fafafa; border:1px solid #22c55e40;
                         border-radius:10px; padding:0.6rem 1rem;
-                        font-size:0.9rem; color:#c8cad6; margin:0.5rem 0;
+                        font-size:0.9rem; color:#1d1d1f; margin:0.5rem 0;
                     ">
-                        <span style="color:#22c55e; font-size:0.7rem;">TRANSCRIPTION ✓</span><br>
+                        <span style="color:#15803d; font-size:0.7rem; font-weight:600;">TRANSCRIPTION ✓</span><br>
                         {transcribed}
                     </div>
                     """, unsafe_allow_html=True)
@@ -735,12 +743,12 @@ else:
     except ImportError:
         st.markdown("""
         <div style="
-            background:#1a0e00; border:1px solid #f97316;
+            background:#fff7ed; border:1px solid #f97316;
             border-radius:10px; padding:1rem 1.25rem;
         ">
             <p style="color:#f97316; font-size:0.85rem; margin:0;">
                 ⚠️  Module microphone non installé.<br>
-                <code style="background:#141720; padding:2px 6px; border-radius:4px;">
+                <code style="background:#fafafa; padding:2px 6px; border-radius:4px;">
                 pip install streamlit-mic-recorder
                 </code>
             </p>
@@ -764,7 +772,7 @@ else:
 # ─────────────────────────────────────────────
 
 st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
-st.markdown('<p style="color:#3a4158; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;">Exemples</p>', unsafe_allow_html=True)
+st.markdown('<p style="color:#86868b; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;">Exemples</p>', unsafe_allow_html=True)
 
 examples = [
     "Je me sens fatigué et il pleut sur la route Tunis–Sfax",
